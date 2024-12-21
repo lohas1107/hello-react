@@ -5,10 +5,14 @@
 		"dockerfile": "Dockerfile"
 	},
   "remoteUser": "node",
+
   "customizations" : {
     "jetbrains" : {
-      "backend" : "WebStorm"
+      "backend" : "WebStorm",
+      "plugins" : [
+        "com.intellij.ml.llm",
+        "com.github.patou.gitmoji",
+      ]
     }
   }
-
 }
