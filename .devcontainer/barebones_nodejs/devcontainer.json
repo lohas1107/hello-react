@@ -16,9 +16,7 @@
     "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,readonly",
   ],
 
-  "postStartCommand": [
-    "make install",
-  ],
+  "postStartCommand": "make install",
 
   "customizations" : {
     "jetbrains" : {
