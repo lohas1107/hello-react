@@ -1,9 +1,9 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-	"name": "Hello React",
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
+  "name": "Hello React",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "remoteUser": "node",
 
   "workspaceFolder": "/workspace",
