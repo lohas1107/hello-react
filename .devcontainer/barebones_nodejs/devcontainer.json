@@ -1,10 +1,15 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-	"name": "Untitled Node.js project",
+	"name": "Hello React",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
   "remoteUser": "node",
+
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,readonly",
+  ],
 
   "customizations" : {
     "jetbrains" : {
