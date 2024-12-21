@@ -12,6 +12,6 @@ install:
 
 dev: install
 	cd $(WORKING_DIRECTORY) && \
-	pnpm run dev
+	pnpm run dev --host
 
 .PHONY: workspace
