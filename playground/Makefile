@@ -1,11 +1,13 @@
-# working directory
-w ?= .
+playground_path ?= .
 
 install:
-	cd $(w) && pnpm i
+	cd $(playground_path) && \
+	pnpm i
 
 dev: install
-	cd $(w) && pnpm run dev --host
+	cd $(playground_path) && \
+	pnpm run dev --host
 
 history:
-	cd $(w) && pnpm install gh-pages --save-dev
+	cd $(playground_path) && \
+	pnpm install gh-pages --save-dev

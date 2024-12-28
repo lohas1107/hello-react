@@ -6,5 +6,5 @@ workspace:
 project:
 	pnpm create vite
 
-w = playground
+playground_path = playground
 include playground/Makefile
