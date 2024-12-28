@@ -1,0 +1,31 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+  "name": "Hello React",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "features": {
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
+  },
+
+  "remoteUser": "node",
+
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,readonly",
+  ],
+
+  "postStartCommand": "make install",
+
+  "customizations" : {
+    "jetbrains" : {
+      "backend" : "WebStorm",
+      "plugins" : [
+        "com.intellij.ml.llm",
+        "com.github.patou.gitmoji",
+        "name.kropp.intellij.makefile",
+      ]
+    }
+  }
+}
