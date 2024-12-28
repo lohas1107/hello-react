@@ -24,6 +24,7 @@
       "plugins" : [
         "com.intellij.ml.llm",
         "com.github.patou.gitmoji",
+        "name.kropp.intellij.makefile",
       ]
     }
   }
