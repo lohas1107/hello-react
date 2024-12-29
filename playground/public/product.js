@@ -45,10 +45,16 @@ function App() {
 
     return (
         <div className="container">
-            <h2>產品列表</h2>
-            <ProductList list={products} selectItemHandler={setSelectedProduct}/>
-            <h2>產品細節</h2>
-            <ProductDetail detail={selectedProduct}/>
+            <div className="row mt-5">
+                <div className="col-md-6">
+                    <h2>產品列表</h2>
+                    <ProductList list={products} selectItemHandler={setSelectedProduct}/>
+                </div>
+                <div className="col-md-6">
+                    <h2>產品細節</h2>
+                    <ProductDetail detail={selectedProduct}/>
+                </div>
+            </div>
         </div>
     );
 }
@@ -91,7 +97,7 @@ const ProductDetail = ({detail}) => {
         ? <p className="text-secondary">請選擇一個商品查看</p>
         : (
             <div className="card">
-                <img src={detail.imageUrl} alt={detail.title}/>
+                <img src={detail.imageUrl} alt={detail.title} className="card-img-top"/>
                 <div className="card-body">
                     <h3 className="card-title">
                         {detail.title}
@@ -103,7 +109,7 @@ const ProductDetail = ({detail}) => {
 
                     <div className="d-flex flex-wrap">
                         {detail.imagesUrl.map((url, index) => (
-                            <img key={index} src={url} alt={url} className="images"/>
+                            <img key={index} src={url} alt={url}/>
                         ))}
                     </div>
                 </div>
