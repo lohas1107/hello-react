@@ -91,6 +91,21 @@ const ProductDetail = ({detail}) => {
             <h2>產品細節</h2>
             <div className="card">
                 <img src={detail.imageUrl} alt={detail.title}/>
+                <div className="card-body">
+                    <h3 className="card-title">
+                        {detail.title}
+                        <span className="badge bg-primary">{detail.category}</span>
+                    </h3>
+                    <p>{detail.description}</p>
+                    <p>{detail.content}</p>
+                    <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
+
+                    <div className="d-flex flex-wrap">
+                        {detail.imagesUrl.map((url, index) => (
+                            <img key={index} src={url} alt={url} className="images"/>
+                        ))}
+                    </div>
+                </div>
             </div>
         </>
     );
