@@ -41,12 +41,18 @@ function App() {
             imagesUrl: ["https://images.unsplash.com/flagged/photo-1557234985-425e10c9d7f1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTA5fHxjYWtlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60", "https://images.unsplash.com/photo-1540337706094-da10342c93d8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGNha2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"]
         }
     ];
+    const [selectedProduct, setSelectedProduct] = React.useState(null);
 
     return (
-        <>
+        <div className="container">
+            <h2>產品列表</h2>
             <ProductList list={products}/>
-            <ProductDetail detail={products[0]}/>
-        </>
+            <h2>產品細節</h2>
+            {selectedProduct
+                ? <ProductDetail detail={selectedProduct}/>
+                : <p className="text-secondary">請選擇一個商品查看</p>
+            }
+        </div>
     );
 }
 
@@ -55,58 +61,52 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 
 const ProductList = ({list}) => {
     return (
-        <>
-            <h2>產品列表</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>產品名稱</th>
-                        <th>原價</th>
-                        <th>售價</th>
-                        <th>是否啟用</th>
-                        <th>查看細節</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {list.map((product) => (
-                    <tr key={product.id}>
-                        <td>{product.title}</td>
-                        <td>{product.origin_price}</td>
-                        <td>{product.price}</td>
-                        <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
-                        <td>
-                            <button>查看細節</button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </>
+        <table>
+            <thead>
+                <tr>
+                    <th>產品名稱</th>
+                    <th>原價</th>
+                    <th>售價</th>
+                    <th>是否啟用</th>
+                    <th>查看細節</th>
+                </tr>
+            </thead>
+            <tbody>
+            {list.map((product) => (
+                <tr key={product.id}>
+                    <td>{product.title}</td>
+                    <td>{product.origin_price}</td>
+                    <td>{product.price}</td>
+                    <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
+                    <td>
+                        <button>查看細節</button>
+                    </td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
     );
 }
 
 const ProductDetail = ({detail}) => {
     return (
-        <>
-            <h2>產品細節</h2>
-            <div className="card">
-                <img src={detail.imageUrl} alt={detail.title}/>
-                <div className="card-body">
-                    <h3 className="card-title">
-                        {detail.title}
-                        <span className="badge bg-primary">{detail.category}</span>
-                    </h3>
-                    <p>{detail.description}</p>
-                    <p>{detail.content}</p>
-                    <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
+        <div className="card">
+            <img src={detail.imageUrl} alt={detail.title}/>
+            <div className="card-body">
+                <h3 className="card-title">
+                    {detail.title}
+                    <span className="badge bg-primary">{detail.category}</span>
+                </h3>
+                <p>{detail.description}</p>
+                <p>{detail.content}</p>
+                <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
 
-                    <div className="d-flex flex-wrap">
-                        {detail.imagesUrl.map((url, index) => (
-                            <img key={index} src={url} alt={url} className="images"/>
-                        ))}
-                    </div>
+                <div className="d-flex flex-wrap">
+                    {detail.imagesUrl.map((url, index) => (
+                        <img key={index} src={url} alt={url} className="images"/>
+                    ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
