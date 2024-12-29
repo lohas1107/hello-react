@@ -46,12 +46,9 @@ function App() {
     return (
         <div className="container">
             <h2>產品列表</h2>
-            <ProductList list={products}/>
+            <ProductList list={products} selectItemHandler={setSelectedProduct}/>
             <h2>產品細節</h2>
-            {selectedProduct
-                ? <ProductDetail detail={selectedProduct}/>
-                : <p className="text-secondary">請選擇一個商品查看</p>
-            }
+            <ProductDetail detail={selectedProduct}/>
         </div>
     );
 }
@@ -59,7 +56,7 @@ function App() {
 // render to root element
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 
-const ProductList = ({list}) => {
+const ProductList = ({list, selectItemHandler}) => {
     return (
         <table>
             <thead>
@@ -79,7 +76,7 @@ const ProductList = ({list}) => {
                     <td>{product.price}</td>
                     <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
                     <td>
-                        <button>查看細節</button>
+                        <button onClick={()=>selectItemHandler(product)}>查看細節</button>
                     </td>
                 </tr>
             ))}
@@ -90,23 +87,27 @@ const ProductList = ({list}) => {
 
 const ProductDetail = ({detail}) => {
     return (
-        <div className="card">
-            <img src={detail.imageUrl} alt={detail.title}/>
-            <div className="card-body">
-                <h3 className="card-title">
-                    {detail.title}
-                    <span className="badge bg-primary">{detail.category}</span>
-                </h3>
-                <p>{detail.description}</p>
-                <p>{detail.content}</p>
-                <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
+        !detail
+        ? <p className="text-secondary">請選擇一個商品查看</p>
+        : (
+            <div className="card">
+                <img src={detail.imageUrl} alt={detail.title}/>
+                <div className="card-body">
+                    <h3 className="card-title">
+                        {detail.title}
+                        <span className="badge bg-primary">{detail.category}</span>
+                    </h3>
+                    <p>{detail.description}</p>
+                    <p>{detail.content}</p>
+                    <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
 
-                <div className="d-flex flex-wrap">
-                    {detail.imagesUrl.map((url, index) => (
-                        <img key={index} src={url} alt={url} className="images"/>
-                    ))}
+                    <div className="d-flex flex-wrap">
+                        {detail.imagesUrl.map((url, index) => (
+                            <img key={index} src={url} alt={url} className="images"/>
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
+        )
     );
 }
