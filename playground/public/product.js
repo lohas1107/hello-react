@@ -1,35 +1,3 @@
-const ProductList = ({products}) => {
-    return (
-        <>
-            <h2>產品列表</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>產品名稱</th>
-                        <th>原價</th>
-                        <th>售價</th>
-                        <th>是否啟用</th>
-                        <th>查看細節</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {products.map((product) => (
-                    <tr key={product.id}>
-                        <td>{product.title}</td>
-                        <td>{product.origin_price}</td>
-                        <td>{product.price}</td>
-                        <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
-                        <td>
-                            <button>查看細節</button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </>
-    );
-}
-
 function App() {
     const products = [
         {
@@ -76,11 +44,54 @@ function App() {
 
     return (
         <>
-            <ProductList products={products}/>
-            <h2>產品細節</h2>
+            <ProductList list={products}/>
+            <ProductDetail detail={products[0]}/>
         </>
     );
 }
 
 // render to root element
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+const ProductList = ({list}) => {
+    return (
+        <>
+            <h2>產品列表</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>產品名稱</th>
+                        <th>原價</th>
+                        <th>售價</th>
+                        <th>是否啟用</th>
+                        <th>查看細節</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {list.map((product) => (
+                    <tr key={product.id}>
+                        <td>{product.title}</td>
+                        <td>{product.origin_price}</td>
+                        <td>{product.price}</td>
+                        <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
+                        <td>
+                            <button>查看細節</button>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </>
+    );
+}
+
+const ProductDetail = ({detail}) => {
+    return (
+        <>
+            <h2>產品細節</h2>
+            <div className="card">
+                <img src={detail.imageUrl} alt={detail.title}/>
+            </div>
+        </>
+    );
+}
