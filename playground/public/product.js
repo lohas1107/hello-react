@@ -46,11 +46,11 @@ function App() {
     return (
         <div className="container">
             <div className="row mt-5">
-                <div className="col-md-6">
+                <div className="col-md-5">
                     <h2>產品列表</h2>
                     <ProductList list={products} selectItemHandler={setSelectedProduct}/>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-7">
                     <h2>產品細節</h2>
                     <ProductDetail detail={selectedProduct}/>
                 </div>
@@ -64,7 +64,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 
 const ProductList = ({list, selectItemHandler}) => {
     return (
-        <table>
+        <table className="table">
             <thead>
                 <tr>
                     <th>產品名稱</th>
@@ -82,7 +82,7 @@ const ProductList = ({list, selectItemHandler}) => {
                     <td>{product.price}</td>
                     <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
                     <td>
-                        <button onClick={()=>selectItemHandler(product)}>查看細節</button>
+                        <button className="btn btn-primary" onClick={()=>selectItemHandler(product)}>查看細節</button>
                     </td>
                 </tr>
             ))}
@@ -107,7 +107,7 @@ const ProductDetail = ({detail}) => {
                     <p>{detail.content}</p>
                     <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
 
-                    <div className="d-flex flex-wrap">
+                    <div>
                         {detail.imagesUrl.map((url, index) => (
                             <img key={index} src={url} alt={url}/>
                         ))}
