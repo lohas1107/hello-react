@@ -14,6 +14,7 @@
   "workspaceFolder": "/workspace",
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,readonly",
+    "source=${localWorkspaceFolder}/../react-training-chapter-2024,target=/workspace/react-training-chapter-2024,type=bind"
   ],
 
   "postStartCommand": "make install",
