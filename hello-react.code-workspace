@@ -7,5 +7,8 @@
 			"path": "../react-training-chapter-2024"
 		}
 	],
-	"settings": {}
+	"settings": {
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
+	}
 }
