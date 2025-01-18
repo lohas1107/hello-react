@@ -1,0 +1,27 @@
+{
+    "name": "Hello React",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "remoteUser": "node",
+    "features": {
+        "ghcr.io/devcontainers-extra/features/pnpm:2": {}
+    },
+
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/hello-react,type=bind",
+    "workspaceFolder": "/workspace/hello-react",
+    "mounts": [
+        {
+            "source": "${localEnv:HOME}${localEnv:USERPROFILE}/.ssh",
+            "target": "/home/node/.ssh",
+            "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/../react-training-chapter-2024",
+            "target": "/workspace/react-training-chapter-2024",
+            "type": "bind"
+        }
+    ],
+
+    "postStartCommand": "make install"
+}
