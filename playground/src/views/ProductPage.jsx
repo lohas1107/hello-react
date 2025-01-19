@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import ProductList from './views/ProductList'
-import ProductDetail from './views/ProductDetail'
+import ProductList from './ProductList'
+import ProductDetail from './ProductDetail'
 
 function ProductPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
