@@ -1,7 +1,32 @@
+import { api } from './api';
 import axios from 'axios';
 
-const API_BASE_URL = 'https://ec-course-api.hexschool.io';
-
 export const admin = {
-  signIn: (formData) => axios.post(`${API_BASE_URL}/v2/admin/signin`, formData),
+  login: async (formData) => {
+    try {
+      const response = await api.signIn(formData);
+      const { token, expired } = response.data;
+      document.cookie = `accessToken=${token}; expires=${new Date(expired)}`;
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  },
+  checkLogin: async () => {
+    try {
+      const token = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('accessToken='))
+        ?.split('=')[1];
+      
+      if (!token) {
+        return false;
+      }
+
+      axios.defaults.headers.common.Authorization = `${token}`;
+      const response = await api.checkLogin();
+      return response.data.success;
+    } catch (error) {
+      return false;
+    }
+  },
 }; 
