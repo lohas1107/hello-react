@@ -14,11 +14,13 @@ const ProductDetail = ({ detail }) => {
             <p>{detail.content}</p>
             <p><del>{detail.origin_price}元</del> / {detail.price}元</p>
 
-            <div>
-              {detail.imagesUrl.map((url, index) => (
-                <img key={index} src={url} alt={url} />
-              ))}
-            </div>
+            {detail.imagesUrl?.length > 0 && (
+              <div>
+                {detail.imagesUrl.map((url, index) => (
+                  <img key={index} src={url} alt={url} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )
