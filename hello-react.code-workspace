@@ -1,14 +1,26 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../react-training-chapter-2024"
-		}
-	],
-	"settings": {
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../react-training-chapter-2024"
+    }
+  ],
+  "settings": {
     "editor.tabSize": 2,
     "editor.detectIndentation": false
-	}
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch Playground",
+        "url": "http://localhost:5173/hello-react/",
+        "webRoot": "${workspaceRoot:hello-react}/playground"
+      }
+    ]
+  }
 }
