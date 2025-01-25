@@ -32,20 +32,35 @@ const LoginPage = () => {
       {isAuth
         ? <ProductPage />
         : (
-          <>
-            <h1>登入</h1>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <input type="email" placeholder="example@mail.com" required />
-                <label htmlFor="email">Email</label>
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <h1>登入</h1>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-floating mb-2">
+                    <input 
+                      type="email" 
+                      className="form-control"
+                      id="username"
+                      required 
+                      autoFocus
+                    />
+                    <label htmlFor="username">Email</label>
+                  </div>
+                  <div className="form-floating mb-2">
+                    <input 
+                      type="password" 
+                      className="form-control"
+                      id="password"
+                      required 
+                    />
+                    <label htmlFor="password">Password</label>
+                  </div>
+                  <button className="btn btn-primary" type="submit">登入</button>
+                </form>
               </div>
-              <div>
-                <input type="password" placeholder="Password" required />
-                <label htmlFor="password">Password</label>
-              </div>
-              <button type="submit">登入</button>
-            </form>
-          </>
+            </div>
+          </div>
         )
       }
     </>
