@@ -23,5 +23,15 @@
         }
     ],
 
-    "postStartCommand": "make install"
+    "postStartCommand": "make install",
+
+    // Configure tool-specific properties.
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "thang-nm.catppuccin-perfect-icons",
+            "ms-vscode.makefile-tools"
+        ]
+      }
+    }
 }
