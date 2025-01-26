@@ -25,8 +25,12 @@ function ProductPage() {
     });
   }, []);
 
-  const showModal = () => {
+  const openModal = () => {
     productModalRef.current.show();
+  }
+
+  const closeModal = () => {
+    productModalRef.current.hide();
   }
 
   return (
@@ -36,7 +40,7 @@ function ProductPage() {
           <div className="container">
             <div className="row mt-5">
               <div className="col-md-6">
-                <button className="btn btn-primary" onClick={() => showModal()}>
+                <button className="btn btn-primary" onClick={openModal}>
                   建立產品
                 </button>
                 <h2>產品列表</h2>
@@ -52,7 +56,7 @@ function ProductPage() {
         : (<LoginPage />)
       }
 
-      <ProductModal />
+      <ProductModal onCloseModal={closeModal} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as bootstrap from 'bootstrap';
 
-function ProductModal() {
+function ProductModal({ onCloseModal }) {
   const productModalRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +20,13 @@ function ProductModal() {
         <div className="modal-dialog">
           <div className="modal-content">
             <h1>Product Modal</h1>
+            <div className='model-footer'>
+              <button 
+                className='btn btn-outline-secondary' 
+                onClick={onCloseModal}>
+                取消
+              </button>
+            </div>
           </div>
         </div>
       </div>
