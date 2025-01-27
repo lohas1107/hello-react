@@ -8,4 +8,5 @@ export const api = {
   checkLogin: () => axios.post(`${API_BASE_URL}/v2/api/user/check`),
 
   getProducts: () => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/admin/products`),
+  createProduct: (productData) => axios.post(`${API_BASE_URL}/v2/api/${API_PATH}/admin/product`, productData),
 };
