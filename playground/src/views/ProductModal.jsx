@@ -7,13 +7,49 @@ function ProductModal({
   onUpdateProductList,
 }) {
   const productModalRef = useRef(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    id: "",
+    title: "",
+    category: "",
+    unit: "",
+    originPrice: "",
+    price: 0,
+    description: "",
+    content: "",
+    isEnabled: false,
+    imageUrl: "",
+    imagesUrl: [],
+  });
 
   useEffect(() => {
     productModalRef.current = new bootstrap.Modal('#productModal', {
       keyboard: false,
     });
   }, []);
+
+  const handleAddImage = () => {
+    setFormData((prevData) => {
+      const newImages = [...prevData.imagesUrl];
+      newImages.push("");
+      return { ...prevData, imagesUrl: newImages };
+    });
+  }
+
+  const handleRemoveImage = () => {
+    setFormData((prevData) => {
+      const newImages = [...prevData.imagesUrl];
+      newImages.pop();
+      return { ...prevData, imagesUrl: newImages };
+    });
+  }
+
+  const handleImageChange = (index, value) => {
+    setFormData((prevData) => {
+      const newImages = [...prevData.imagesUrl];
+      newImages[index] = value;
+      return { ...prevData, imagesUrl: newImages };
+    });
+  }
 
   const handleFormChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -75,17 +111,50 @@ function ProductModal({
                   <input
                     id='imageUrl'
                     type='text'
-                    className='form-control'
-                    placeholder='請輸入圖片連結'
+                    className='form-control mb-2'
+                    placeholder='請輸入主圖連結'
                     value={formData.imageUrl}
                     onChange={handleFormChange}
                   />
+                  <img
+                    className='img-fluid mb-2'
+                    src={formData.imageUrl}
+                    alt='主圖'
+                  />
                 </div>
-                <img
-                  src={formData.imageUrl}
-                  alt='主圖'
-                  className='img-fluid'
-                />
+
+                <div>
+                  {formData.imagesUrl.map((image, index) => (
+                    <div key={index}>
+                      <input
+                        type='text'
+                        className='form-control mb-2'
+                        placeholder={`副圖連結 ${index + 1}`}
+                        value={image}
+                        onChange={(e) => handleImageChange(index, e.target.value)}
+                      />
+                      {image && (
+                        <img
+                          src={image}
+                          alt={`副圖 ${index + 1}`}
+                        // className='img-preview mb-2'
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className='d-flex justify-content-between'>
+                  {formData.imagesUrl.length < 5 && formData.imagesUrl[formData.imagesUrl.length - 1] !== "" && (
+                    <button
+                      className='btn btn-outline-primary btn-sm w-100'
+                      onClick={handleAddImage}>新增副圖</button>
+                  )}
+                  {formData.imagesUrl.length >= 1 && (
+                    <button
+                      className='btn btn-outline-danger btn-sm w-100'
+                      onClick={handleRemoveImage}>取消副圖</button>
+                  )}
+                </div>
               </div>
               <div className='col-sm-8'>
                 <div className='mb-3'>
