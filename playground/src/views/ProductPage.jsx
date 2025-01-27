@@ -4,13 +4,15 @@ import ProductDetail from './ProductDetail'
 import ProductModal from './ProductModal';
 import LoginPage from './LoginPage'
 import * as bootstrap from 'bootstrap';
-import { admin } from '../api/admin';
 
+import { admin } from '../api/admin';
+import { api } from '../api/api';
 
 function ProductPage() {
   const [isAuth, setIsAuth] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const productModalRef = useRef(null);
 
   useEffect(() => {
@@ -20,10 +22,23 @@ function ProductPage() {
     };
     init();
 
+    getProducts();
+
     productModalRef.current = new bootstrap.Modal('#productModal', {
       keyboard: false,
     });
   }, []);
+
+  const getProducts = async () => {
+    await api
+      .getProducts()
+      .then((res) => {
+        setProducts(res.data.products);
+      })
+      .catch((err) => {
+        console.error(err.response.data.message);
+      });
+  };
 
   const openModal = () => {
     productModalRef.current.show();
@@ -44,7 +59,10 @@ function ProductPage() {
                   建立產品
                 </button>
                 <h2>產品列表</h2>
-                <ProductList selectItemHandler={setSelectedProduct} />
+                <ProductList
+                  products={products}
+                  onSelectProduct={setSelectedProduct}
+                />
               </div>
               <div className="col-md-6">
                 <h2>產品細節</h2>
@@ -56,7 +74,10 @@ function ProductPage() {
         : (<LoginPage />)
       }
 
-      <ProductModal onCloseModal={closeModal} />
+      <ProductModal
+        onCloseModal={closeModal}
+        onUpdateProductList={getProducts}
+      />
     </>
   );
 }

@@ -2,7 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import * as bootstrap from 'bootstrap';
 import { api } from '../api/api';
 
-function ProductModal({ onCloseModal }) {
+function ProductModal({
+  onCloseModal,
+  onUpdateProductList,
+}) {
   const productModalRef = useRef(null);
   const [formData, setFormData] = useState({});
 
@@ -35,6 +38,7 @@ function ProductModal({ onCloseModal }) {
       .createProduct(productData)
       .then(() => {
         onCloseModal();
+        onUpdateProductList();
       })
       .catch((err) => {
         console.error("新增失敗", err.response.data.message);
