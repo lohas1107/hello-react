@@ -10,8 +10,8 @@ function ProductList({
           <th>產品名稱</th>
           <th>原價</th>
           <th>售價</th>
-          <th>是否啟用</th>
-          <th>編輯</th>
+          <th>啟用</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -21,7 +21,12 @@ function ProductList({
             <td>{product.title}</td>
             <td>{product.origin_price}</td>
             <td>{product.price}</td>
-            <td>{product.is_enabled ? "啟用" : "未啟用"}</td>
+            <td>
+              {product.is_enabled
+                ? <span className="text-success">啟用</span>
+                : <span className="text-secondary">未啟用</span>
+              }
+            </td>
             <td>
               <div className="btn-group">
                 <button

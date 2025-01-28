@@ -77,7 +77,26 @@ function ProductPage() {
       });
   }
 
-  const updateProduct = (product) => {
+  const updateProduct = async (product) => {
+    const productData = {
+      data: {
+        ...product,
+        origin_price: Number(product.originPrice),
+        price: Number(product.price),
+        is_enabled: product.isEnabled ? 1 : 0,
+        imagesUrl: product.imagesUrl,
+      },
+    };
+
+    await api
+      .updateProduct(productData)
+      .then(() => {
+        closeModal();
+        getProducts();
+      })
+      .catch((err) => {
+        console.error("更新失敗", err.response.data.message);
+      });
   }
 
   const openModal = (mode, product) => {

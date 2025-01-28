@@ -214,7 +214,7 @@ function ProductModal({
             mode={mode}
             onCloseModal={onCloseModal}
             onCreateProduct={onCreateProduct}
-            onUpdateProduct={onUpdateProduct}
+            onUpdateProduct={() => onUpdateProduct(product)}
           />
         </div>
       </div>
@@ -254,12 +254,27 @@ const ProductModalFooter = ({
 }) => {
   return (
     <div className='modal-footer'>
-      <button className='btn btn-outline-secondary' onClick={onCloseModal}>取消</button>
+      <button
+        type='button'
+        className='btn btn-outline-secondary'
+        onClick={onCloseModal}>
+        取消
+      </button>
       {
         mode === 'create'
-          ? <button className='btn btn-primary' onClick={onCreateProduct}>新增</button>
+          ? <button
+            type='button'
+            className='btn btn-primary'
+            onClick={onCreateProduct}>
+            新增
+          </button>
           : mode === 'update'
-            ? <button className='btn btn-primary' onClick={onUpdateProduct}>更新</button>
+            ? <button
+              type='button'
+              className='btn btn-primary'
+              onClick={onUpdateProduct}>
+              更新
+            </button>
             : null
       }
     </div>
