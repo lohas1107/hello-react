@@ -10,4 +10,5 @@ export const api = {
   getProducts: () => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/admin/products`),
   createProduct: (productData) => axios.post(`${API_BASE_URL}/v2/api/${API_PATH}/admin/product`, productData),
   updateProduct: (productData) => axios.put(`${API_BASE_URL}/v2/api/${API_PATH}/admin/product/${productData.data.id}`, productData),
+  deleteProduct: (productId) => axios.delete(`${API_BASE_URL}/v2/api/${API_PATH}/admin/product/${productId}`),
 };

@@ -34,6 +34,11 @@ function ProductList({
                   onClick={() => onEditProduct('update', product)}>
                   編輯
                 </button>
+                <button
+                  className="btn btn-outline-danger btn-sm"
+                  onClick={() => onEditProduct('delete', product)}>
+                  刪除
+                </button>
               </div>
             </td>
           </tr>

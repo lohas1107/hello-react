@@ -99,6 +99,18 @@ function ProductPage() {
       });
   }
 
+  const deleteProduct = async (product) => {
+    await api
+      .deleteProduct(product.id)
+      .then(() => {
+        closeModal();
+        getProducts();
+      })
+      .catch((err) => {
+        console.error("刪除失敗", err.response.data.message);
+      }); 
+  }
+
   const openModal = (mode, product) => {
     setModalMode(mode);
     setFormData(product);
@@ -139,6 +151,7 @@ function ProductPage() {
         onEditProduct={setFormData}
         onCreateProduct={createProduct}
         onUpdateProduct={updateProduct}
+        onDeleteProduct={deleteProduct}
       />
     </>
   );
