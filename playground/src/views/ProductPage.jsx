@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import ProductList from './ProductList'
-import ProductDetail from './ProductDetail'
 import ProductModal from './ProductModal';
 import LoginPage from './LoginPage'
 import * as bootstrap from 'bootstrap';
@@ -12,10 +11,8 @@ function ProductPage() {
   const [isAuth, setIsAuth] = useState(false);
 
   const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const productModalRef = useRef(null);
   const [modalMode, setModalMode] = useState(null);
+  const productModalRef = useRef(null);
 
   const initProduct = {
     id: "",
@@ -98,23 +95,18 @@ function ProductPage() {
       {isAuth
         ? (
           <div className="container">
-            <div className="row mt-5">
-              <div className="col-md-6">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => openModal('create', initProduct)}>
-                  建立產品
-                </button>
-                <h2>產品列表</h2>
-                <ProductList
-                  products={products}
-                  onEditProduct={openModal}
-                />
-              </div>
-              <div className="col-md-6">
-                <h2>產品細節</h2>
-                <ProductDetail detail={selectedProduct} />
-              </div>
+            <div className="text-end mt-4">
+              <button
+                className="btn btn-primary"
+                onClick={() => openModal('create', initProduct)}>
+                建立產品
+              </button>
+            </div>
+            <div className="mt-4">
+              <ProductList
+                products={products}
+                onEditProduct={openModal}
+              />
             </div>
           </div>
         )
