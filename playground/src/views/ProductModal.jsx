@@ -150,7 +150,7 @@ const ProductModalBody = ({
 
               <div>
                 {product.imagesUrl.map((image, index) => (
-                  <div key={index}>
+                  <div key={index} className='mb-2'>
                     <input
                       type='text'
                       className='form-control mb-2'
@@ -162,7 +162,7 @@ const ProductModalBody = ({
                       <img
                         src={image}
                         alt={`副圖 ${index + 1}`}
-                      // className='img-preview mb-2'
+                        className='img-fluid mb-2'
                       />
                     )}
                   </div>
