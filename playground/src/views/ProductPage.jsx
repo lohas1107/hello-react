@@ -108,12 +108,17 @@ function ProductPage() {
       })
       .catch((err) => {
         console.error("刪除失敗", err.response.data.message);
-      }); 
+      });
   }
 
   const openModal = (mode, product) => {
     setModalMode(mode);
-    setFormData(product);
+    setFormData({
+      ...product,
+      originPrice: product.origin_price,
+      isEnabled: product.is_enabled === 1,
+      imagesUrl: product.imagesUrl || [],
+    });
     productModalRef.current.show();
   }
 
