@@ -19,7 +19,7 @@ function ProductPage() {
     title: "",
     category: "",
     unit: "",
-    originPrice: "",
+    originPrice: 0,
     price: 0,
     description: "",
     content: "",
@@ -115,7 +115,7 @@ function ProductPage() {
     setModalMode(mode);
     setFormData({
       ...product,
-      originPrice: product.origin_price,
+      originPrice: product.origin_price || 0,
       isEnabled: product.is_enabled === 1,
       imagesUrl: product.imagesUrl || [],
     });
