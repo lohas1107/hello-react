@@ -1,7 +1,6 @@
 function ProductList({
   products,
   onEditProduct,
-  onSelectProduct
 }) {
   return (
     <table className="table">
@@ -27,15 +26,10 @@ function ProductList({
               <div className="btn-group">
                 <button
                   className="btn btn-outline-primary btn-sm"
-                  onClick={() => onEditProduct(product)}>
+                  onClick={() => onEditProduct('update', product)}>
                   編輯
                 </button>
               </div>
-              <button
-                className="btn btn-primary"
-                onClick={() => onSelectProduct(product)}>
-                查看細節
-              </button>
             </td>
           </tr>
         ))}

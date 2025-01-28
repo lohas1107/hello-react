@@ -15,7 +15,9 @@ function ProductPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const productModalRef = useRef(null);
-  const [formData, setFormData] = useState({
+  const [modalMode, setModalMode] = useState(null);
+
+  const initProduct = {
     id: "",
     title: "",
     category: "",
@@ -27,7 +29,9 @@ function ProductPage() {
     isEnabled: false,
     imageUrl: "",
     imagesUrl: [],
-  });
+  };
+
+  const [formData, setFormData] = useState(initProduct);
 
   useEffect(() => {
     const init = async () => {
@@ -76,11 +80,12 @@ function ProductPage() {
       });
   }
 
-  const editProduct = (product) => {
-    openModal();
+  const updateProduct = (product) => {
   }
 
-  const openModal = () => {
+  const openModal = (mode, product) => {
+    setModalMode(mode);
+    setFormData(product);
     productModalRef.current.show();
   }
 
@@ -95,14 +100,15 @@ function ProductPage() {
           <div className="container">
             <div className="row mt-5">
               <div className="col-md-6">
-                <button className="btn btn-primary" onClick={openModal}>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => openModal('create', initProduct)}>
                   建立產品
                 </button>
                 <h2>產品列表</h2>
                 <ProductList
                   products={products}
-                  onEditProduct={editProduct}
-                  onSelectProduct={setSelectedProduct}
+                  onEditProduct={openModal}
                 />
               </div>
               <div className="col-md-6">
@@ -116,10 +122,12 @@ function ProductPage() {
       }
 
       <ProductModal
+        mode={modalMode}
         product={formData}
         onCloseModal={closeModal}
         onEditProduct={setFormData}
         onCreateProduct={createProduct}
+        onUpdateProduct={updateProduct}
       />
     </>
   );

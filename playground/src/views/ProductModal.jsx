@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react';
 import * as bootstrap from 'bootstrap';
 
 function ProductModal({
+  mode,
   product,
   onCloseModal,
   onEditProduct,
   onCreateProduct,
+  onUpdateProduct,
 }) {
   const productModalRef = useRef(null);
 
@@ -58,17 +60,7 @@ function ProductModal({
     >
       <div className="modal-dialog modal-xl">
         <div className="modal-content border-0">
-          <div className='modal-header'>
-            <h3 id='productModalLabel' className='modal-title'>
-              <span>建立產品</span>
-            </h3>
-            <button
-              type='button'
-              className='btn-close'
-              data-bs-dismiss='modal'
-              aria-label='Close'
-            ></button>
-          </div>
+          <ProductModalHeader mode={mode} />
           <div className='modal-body'>
             <div className='row'>
               <div className='col-sm-4'>
@@ -218,20 +210,58 @@ function ProductModal({
               </div>
             </div>
           </div>
-          <div className='modal-footer'>
-            <button
-              className='btn btn-outline-secondary'
-              onClick={onCloseModal}>
-              取消
-            </button>
-            <button
-              className='btn btn-primary'
-              onClick={onCreateProduct}>
-              新增
-            </button>
-          </div>
+          <ProductModalFooter
+            mode={mode}
+            onCloseModal={onCloseModal}
+            onCreateProduct={onCreateProduct}
+            onUpdateProduct={onUpdateProduct}
+          />
         </div>
       </div>
+    </div>
+  );
+}
+
+const ProductModalHeader = ({ mode }) => {
+  return (
+    <div className='modal-header'>
+      <h3 id='productModalLabel' className='modal-title'>
+        <span>
+          {
+            mode === 'create'
+              ? '建立產品'
+              : mode === 'update'
+                ? '編輯產品'
+                : null
+          }
+        </span>
+      </h3>
+      <button
+        type='button'
+        className='btn-close'
+        data-bs-dismiss='modal'
+        aria-label='Close'
+      ></button>
+    </div>
+  );
+}
+
+const ProductModalFooter = ({
+  mode,
+  onCloseModal,
+  onCreateProduct,
+  onUpdateProduct,
+}) => {
+  return (
+    <div className='modal-footer'>
+      <button className='btn btn-outline-secondary' onClick={onCloseModal}>取消</button>
+      {
+        mode === 'create'
+          ? <button className='btn btn-primary' onClick={onCreateProduct}>新增</button>
+          : mode === 'update'
+            ? <button className='btn btn-primary' onClick={onUpdateProduct}>更新</button>
+            : null
+      }
     </div>
   );
 }
