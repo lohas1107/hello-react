@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import * as bootstrap from 'bootstrap';
 
 function ProductModal({
@@ -108,7 +109,6 @@ const ProductModalHeader = ({ mode }) => {
     </div>
   );
 }
-
 
 const ProductModalBody = ({
   mode,
@@ -325,5 +325,15 @@ const ProductModalFooter = ({
     </div>
   );
 }
+
+ProductModal.propTypes = {
+  mode: PropTypes.string,
+  product: PropTypes.object,
+  onCloseModal: PropTypes.func.isRequired,
+  onEditProduct: PropTypes.func.isRequired,
+  onCreateProduct: PropTypes.func.isRequired,
+  onUpdateProduct: PropTypes.func.isRequired,
+  onDeleteProduct: PropTypes.func.isRequired,
+};
 
 export default ProductModal;

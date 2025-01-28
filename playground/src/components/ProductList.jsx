@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function ProductList({
   products,
   onEditProduct,
@@ -47,5 +49,10 @@ function ProductList({
     </table>
   );
 }
+
+ProductList.propTypes = {
+  products: PropTypes.array.isRequired,
+  onEditProduct: PropTypes.func.isRequired,
+};
 
 export default ProductList;

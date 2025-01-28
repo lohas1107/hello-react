@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ProductDetail = ({ detail }) => {    
   return (
     !detail
@@ -26,5 +28,9 @@ const ProductDetail = ({ detail }) => {
       )
   );
 }
+
+ProductDetail.propTypes = {
+  detail: PropTypes.object.isRequired,
+};
 
 export default ProductDetail;
