@@ -1,25 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as bootstrap from 'bootstrap';
-import { api } from '../api/api';
 
 function ProductModal({
+  product,
   onCloseModal,
-  onUpdateProductList,
+  onEditProduct,
+  onCreateProduct,
 }) {
   const productModalRef = useRef(null);
-  const [formData, setFormData] = useState({
-    id: "",
-    title: "",
-    category: "",
-    unit: "",
-    originPrice: "",
-    price: 0,
-    description: "",
-    content: "",
-    isEnabled: false,
-    imageUrl: "",
-    imagesUrl: [],
-  });
 
   useEffect(() => {
     productModalRef.current = new bootstrap.Modal('#productModal', {
@@ -28,7 +16,7 @@ function ProductModal({
   }, []);
 
   const handleAddImage = () => {
-    setFormData((prevData) => {
+    onEditProduct((prevData) => {
       const newImages = [...prevData.imagesUrl];
       newImages.push("");
       return { ...prevData, imagesUrl: newImages };
@@ -36,7 +24,7 @@ function ProductModal({
   }
 
   const handleRemoveImage = () => {
-    setFormData((prevData) => {
+    onEditProduct((prevData) => {
       const newImages = [...prevData.imagesUrl];
       newImages.pop();
       return { ...prevData, imagesUrl: newImages };
@@ -44,7 +32,7 @@ function ProductModal({
   }
 
   const handleImageChange = (index, value) => {
-    setFormData((prevData) => {
+    onEditProduct((prevData) => {
       const newImages = [...prevData.imagesUrl];
       newImages[index] = value;
       return { ...prevData, imagesUrl: newImages };
@@ -53,32 +41,10 @@ function ProductModal({
 
   const handleFormChange = (e) => {
     const { id, value, type, checked } = e.target;
-    setFormData((prevData) => ({
+    onEditProduct((prevData) => ({
       ...prevData,
       [id]: type === 'checkbox' ? checked : value,
     }));
-  }
-
-  const onCreateProduct = async () => {
-    const productData = {
-      data: {
-        ...formData,
-        origin_price: Number(formData.originPrice),
-        price: Number(formData.price),
-        is_enabled: formData.isEnabled ? 1 : 0,
-        imagesUrl: formData.imagesUrl,
-      },
-    };
-
-    await api
-      .createProduct(productData)
-      .then(() => {
-        onCloseModal();
-        onUpdateProductList();
-      })
-      .catch((err) => {
-        console.error("新增失敗", err.response.data.message);
-      });
   }
 
   return (
@@ -113,18 +79,18 @@ function ProductModal({
                     type='text'
                     className='form-control mb-2'
                     placeholder='請輸入主圖連結'
-                    value={formData.imageUrl}
+                    value={product.imageUrl}
                     onChange={handleFormChange}
                   />
                   <img
                     className='img-fluid mb-2'
-                    src={formData.imageUrl}
+                    src={product.imageUrl}
                     alt='主圖'
                   />
                 </div>
 
                 <div>
-                  {formData.imagesUrl.map((image, index) => (
+                  {product.imagesUrl.map((image, index) => (
                     <div key={index}>
                       <input
                         type='text'
@@ -144,12 +110,12 @@ function ProductModal({
                   ))}
                 </div>
                 <div className='d-flex justify-content-between'>
-                  {formData.imagesUrl.length < 5 && formData.imagesUrl[formData.imagesUrl.length - 1] !== "" && (
+                  {product.imagesUrl.length < 5 && product.imagesUrl[product.imagesUrl.length - 1] !== "" && (
                     <button
                       className='btn btn-outline-primary btn-sm w-100'
                       onClick={handleAddImage}>新增副圖</button>
                   )}
-                  {formData.imagesUrl.length >= 1 && (
+                  {product.imagesUrl.length >= 1 && (
                     <button
                       className='btn btn-outline-danger btn-sm w-100'
                       onClick={handleRemoveImage}>取消副圖</button>
@@ -164,7 +130,7 @@ function ProductModal({
                     type='text'
                     className='form-control'
                     placeholder='請輸入標題'
-                    value={formData.title}
+                    value={product.title}
                     onChange={handleFormChange}
                   />
                 </div>
@@ -176,7 +142,7 @@ function ProductModal({
                       type='text'
                       className='form-control'
                       placeholder='請輸入分類'
-                      value={formData.category}
+                      value={product.category}
                       onChange={handleFormChange}
                     />
                   </div>
@@ -187,7 +153,7 @@ function ProductModal({
                       type='text'
                       className='form-control'
                       placeholder='請輸入單位'
-                      value={formData.unit}
+                      value={product.unit}
                       onChange={handleFormChange}
                     />
                   </div>
@@ -200,7 +166,7 @@ function ProductModal({
                       type='number'
                       className='form-control'
                       placeholder='請輸入原價'
-                      value={formData.originPrice}
+                      value={product.originPrice}
                       onChange={handleFormChange}
                     />
                   </div>
@@ -211,7 +177,7 @@ function ProductModal({
                       type='number'
                       className='form-control'
                       placeholder='請輸入售價'
-                      value={formData.price}
+                      value={product.price}
                       onChange={handleFormChange}
                     />
                   </div>
@@ -223,7 +189,7 @@ function ProductModal({
                     id='description'
                     className='form-control'
                     placeholder='請輸入產品描述'
-                    value={formData.description}
+                    value={product.description}
                     onChange={handleFormChange}
                   ></textarea>
                 </div>
@@ -233,7 +199,7 @@ function ProductModal({
                     id='content'
                     className='form-control'
                     placeholder='請輸入說明內容'
-                    value={formData.content}
+                    value={product.content}
                     onChange={handleFormChange}
                   ></textarea>
                 </div>
@@ -244,7 +210,7 @@ function ProductModal({
                       id='isEnabled'
                       type='checkbox'
                       className='form-check-input'
-                      checked={formData.isEnabled}
+                      checked={product.isEnabled}
                       onChange={handleFormChange}
                     />
                   </div>

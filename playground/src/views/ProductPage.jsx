@@ -13,7 +13,21 @@ function ProductPage() {
 
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
   const productModalRef = useRef(null);
+  const [formData, setFormData] = useState({
+    id: "",
+    title: "",
+    category: "",
+    unit: "",
+    originPrice: "",
+    price: 0,
+    description: "",
+    content: "",
+    isEnabled: false,
+    imageUrl: "",
+    imagesUrl: [],
+  });
 
   useEffect(() => {
     const init = async () => {
@@ -40,6 +54,32 @@ function ProductPage() {
       });
   };
 
+  const createProduct = async () => {
+    const productData = {
+      data: {
+        ...formData,
+        origin_price: Number(formData.originPrice),
+        price: Number(formData.price),
+        is_enabled: formData.isEnabled ? 1 : 0,
+        imagesUrl: formData.imagesUrl,
+      },
+    };
+
+    await api
+      .createProduct(productData)
+      .then(() => {
+        closeModal();
+        getProducts();
+      })
+      .catch((err) => {
+        console.error("新增失敗", err.response.data.message);
+      });
+  }
+
+  const editProduct = (product) => {
+    openModal();
+  }
+
   const openModal = () => {
     productModalRef.current.show();
   }
@@ -61,6 +101,7 @@ function ProductPage() {
                 <h2>產品列表</h2>
                 <ProductList
                   products={products}
+                  onEditProduct={editProduct}
                   onSelectProduct={setSelectedProduct}
                 />
               </div>
@@ -75,8 +116,10 @@ function ProductPage() {
       }
 
       <ProductModal
+        product={formData}
         onCloseModal={closeModal}
-        onUpdateProductList={getProducts}
+        onEditProduct={setFormData}
+        onCreateProduct={createProduct}
       />
     </>
   );
