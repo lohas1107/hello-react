@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import ProductList from './ProductList'
+import Pagination from './Pagination'
 import ProductModal from './ProductModal';
 import LoginPage from './LoginPage'
 import * as bootstrap from 'bootstrap';
@@ -24,6 +25,8 @@ const initProduct = {
 function ProductPage() {
   const [isAuth, setIsAuth] = useState(false);
   const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({});
+
   const [modalMode, setModalMode] = useState(null);
   const [formData, setFormData] = useState(initProduct);
   const productModalRef = useRef(null);
@@ -42,11 +45,12 @@ function ProductPage() {
     });
   }, []);
 
-  const getProducts = async () => {
+  const getProducts = async (page = 1) => {
     await api
-      .getProducts()
+      .getProducts(page)
       .then((res) => {
         setProducts(res.data.products);
+        setPagination(res.data.pagination);
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -142,6 +146,10 @@ function ProductPage() {
                 onEditProduct={openModal}
               />
             </div>
+            <Pagination
+              pagination={pagination}
+              onPageChange={getProducts}
+            />
           </div>
         )
         : (<LoginPage />)
