@@ -20,6 +20,13 @@
         "name": "Launch EC Portal",
         "url": "http://localhost:5173/ec-portal/",
         "webRoot": "${workspaceRoot:hello-react}/ec-portal"
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch EC Shop",
+        "url": "http://localhost:5173/ec-shop/",
+        "webRoot": "${workspaceRoot:hello-react}/ec-shop"
       }
     ]
   }
