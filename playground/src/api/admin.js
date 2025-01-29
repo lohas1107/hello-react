@@ -22,7 +22,7 @@ export const admin = {
         return false;
       }
 
-      axios.defaults.headers.common.Authorization = `${token}`;
+      axios.defaults.headers.common.Authorization = token;
       const response = await api.checkLogin();
       return response.data.success;
     } catch (error) {
