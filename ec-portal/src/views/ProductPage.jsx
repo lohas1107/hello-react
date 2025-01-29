@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import ProductList from './ProductList'
-import Pagination from './Pagination'
-import ProductModal from './ProductModal';
-import LoginPage from './LoginPage'
+import ProductList from '../components/ProductList'
+import Pagination from '../components/Pagination'
+import ProductModal from '../components/ProductModal';
+import LoginPage from '../views/LoginPage'
 import * as bootstrap from 'bootstrap';
 
 import { admin } from '../api/admin';
