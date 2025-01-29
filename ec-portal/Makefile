@@ -8,10 +8,10 @@ dev: install
 	cd $(dir) && \
 	pnpm run dev --host
 
-deploy:
+predeploy:
 	cd $(dir) && \
-	pnpm run deploy
+	pnpm run predeploy
 
-history:
+deploy: predeploy
 	cd $(dir) && \
-	pnpm install gh-pages --save-dev
+	pnpx gh-pages -d dist -r git@github.com:yarrtech/ec-portal.git
