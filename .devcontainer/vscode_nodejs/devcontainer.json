@@ -30,6 +30,7 @@
       "vscode": {
         "extensions": [
             "thang-nm.catppuccin-perfect-icons",
+            "eamodio.gitlens",
             "ms-vscode.makefile-tools"
         ]
       }
