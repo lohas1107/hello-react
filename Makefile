@@ -6,5 +6,5 @@ workspace:
 project:
 	pnpm create vite
 
-playground_path = playground
-include playground/Makefile
+dir ?= ec-portal
+include $(dir)/Makefile

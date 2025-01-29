@@ -17,9 +17,9 @@
       {
         "type": "chrome",
         "request": "launch",
-        "name": "Launch Playground",
+        "name": "Launch EC Portal",
         "url": "http://localhost:5173/hello-react/",
-        "webRoot": "${workspaceRoot:hello-react}/playground"
+        "webRoot": "${workspaceRoot:hello-react}/ec-portal"
       }
     ]
   }
