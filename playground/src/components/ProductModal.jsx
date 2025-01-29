@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as bootstrap from 'bootstrap';
+import { api } from '../api/api';
 
 function ProductModal({
   mode,
@@ -18,6 +19,26 @@ function ProductModal({
       keyboard: false,
     });
   }, []);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file-to-upload', file);
+
+    await api
+      .uploadImage(formData)
+      .then((res) => {
+        onEditProduct((prevData) => ({
+          ...prevData,
+          imageUrl: res.data.imageUrl,
+        }));
+      })
+      .catch((err) => {
+        console.log('上傳失敗', err.response.data.message);
+      });
+  }
 
   const handleAddImage = () => {
     onEditProduct((prevData) => {
@@ -66,6 +87,7 @@ function ProductModal({
           <ProductModalBody
             mode={mode}
             product={product}
+            handleFileChange={handleFileChange}
             handleFormChange={handleFormChange}
             handleImageChange={handleImageChange}
             handleAddImage={handleAddImage}
@@ -113,6 +135,7 @@ const ProductModalHeader = ({ mode }) => {
 const ProductModalBody = ({
   mode,
   product,
+  handleFileChange,
   handleFormChange,
   handleImageChange,
   handleAddImage,
@@ -131,6 +154,17 @@ const ProductModalBody = ({
         : (
           <div className='row'>
             <div className='col-sm-4'>
+              <div className='mb-3'>
+                <label htmlFor='fileInput' className='form-label'> 圖片上傳 </label>
+                <input
+                  id='fileInput'
+                  type='file'
+                  accept='.jpg,.jpeg,.png'
+                  className='form-control'
+                  onChange={handleFileChange}
+                />
+              </div>
+              <p>or</p>
               <div className='mb-3'>
                 <label htmlFor='imageUrl' className='form-label'> 圖片連結 </label>
                 <input
