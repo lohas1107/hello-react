@@ -1,7 +1,8 @@
+import ProductPage from "./views/ProductPage";
 
 function App() {
   return (
-    <h1>Hello World</h1>
+    <ProductPage />
   )
 }
 
