@@ -223,6 +223,7 @@ const ProductModalBody = ({
                   <input
                     id='originPrice'
                     type='number'
+                    min='0'
                     className='form-control'
                     placeholder='請輸入原價'
                     value={product.originPrice}
@@ -234,6 +235,7 @@ const ProductModalBody = ({
                   <input
                     id='price'
                     type='number'
+                    min='0'
                     className='form-control'
                     placeholder='請輸入售價'
                     value={product.price}
