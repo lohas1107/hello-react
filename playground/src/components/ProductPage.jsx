@@ -51,7 +51,7 @@ function ProductPage() {
         setProducts(res.data.products);
       })
       .catch((err) => {
-        console.error(err.response.data.message);
+        alert(err.response.data.message);
       });
   };
 
@@ -73,7 +73,7 @@ function ProductPage() {
         getProducts();
       })
       .catch((err) => {
-        console.error("新增失敗", err.response.data.message);
+        alert(err.response.data.message);
       });
   }
 
@@ -95,7 +95,7 @@ function ProductPage() {
         getProducts();
       })
       .catch((err) => {
-        console.error("更新失敗", err.response.data.message);
+        alert(err.response.data.message);
       });
   }
 
@@ -107,7 +107,7 @@ function ProductPage() {
         getProducts();
       })
       .catch((err) => {
-        console.error("刪除失敗", err.response.data.message);
+        alert(err.response.data.message);
       });
   }
 
