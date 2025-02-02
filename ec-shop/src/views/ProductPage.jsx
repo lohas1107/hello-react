@@ -5,9 +5,10 @@ import ShoppingCart from "./ShoppingCart";
 import { api } from "../api/api";
 
 function ProductPage() {
-  // 商品列表
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
+
+  const [cart, setCart] = useState({});
 
   const getProducts = async (page = 1) => {
     await api.getProducts(page)
@@ -20,17 +21,20 @@ function ProductPage() {
       });
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
-
-  // 購物車
-  const [cart, setCart] = useState([]);
-
   const getCart = async () => {
     await api.getCart()
       .then((res) => {
-        setCart(res.data.cart);
+        setCart(res.data.data);
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
+  };
+
+  const addToCart = async (productId, qty) => {
+    await api.addToCart(productId, qty)
+      .then(() => {
+        getCart();
       })
       .catch((err) => {
         alert(err.response.data);
@@ -38,6 +42,7 @@ function ProductPage() {
   };
 
   useEffect(() => {
+    getProducts();
     getCart();
   }, []);
 
@@ -46,12 +51,16 @@ function ProductPage() {
       <div className="row">
         <div className="col-md-8">
           <div className="mt-4">
-            <ProductList products={products} />
+            <ProductList
+              products={products}
+              onAddToCart={addToCart}
+            />
           </div>
           <div className="mt-4">
             <Pagination
               pagination={pagination}
               onPageChange={getProducts}
+              onAddToCart={addToCart}
             />
           </div>
         </div>

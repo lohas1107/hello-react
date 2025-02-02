@@ -7,4 +7,5 @@ export const api = {
   getProducts: (page = 1) => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/products?page=${page}`),
 
   getCart: () => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/cart`),
+  addToCart: (productId, qty) => axios.post(`${API_BASE_URL}/v2/api/${API_PATH}/cart`, { data: { product_id: productId, qty } }),
 };
