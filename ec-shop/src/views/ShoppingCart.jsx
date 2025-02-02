@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function ShoppingCartPage({ cart }) {
+function ShoppingCart({ cart }) {
 
   return (
     <>
@@ -33,8 +33,8 @@ function ShoppingCartPage({ cart }) {
   );
 }
 
-ShoppingCartPage.propTypes = {
+ShoppingCart.propTypes = {
   cart: PropTypes.array,
 };
 
-export default ShoppingCartPage;
+export default ShoppingCart;

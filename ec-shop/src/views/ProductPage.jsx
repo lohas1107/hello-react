@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination";
-import ShoppingCartPage from "./ShoppingCartPage";
+import ShoppingCart from "./ShoppingCart";
 import { api } from "../api/api";
 
 function ProductPage() {
@@ -57,7 +57,7 @@ function ProductPage() {
         </div>
         <div className="col-md-4">
           <div className="mt-5">
-            <ShoppingCartPage cart={cart} />
+            <ShoppingCart cart={cart} />
           </div>
         </div>
       </div>
