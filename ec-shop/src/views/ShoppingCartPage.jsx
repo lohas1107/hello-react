@@ -1,7 +1,6 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
 
-function ShoppingCartPage() {
-  const [cart, setCart] = useState([]);
+function ShoppingCartPage({ cart }) {
 
   return (
     <>
@@ -19,16 +18,23 @@ function ShoppingCartPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {cart?.carts &&
+            cart?.carts.map((item) => (
+              <tr key={item.id}>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </>
   );
 }
+
+ShoppingCartPage.propTypes = {
+  cart: PropTypes.array,
+};
 
 export default ShoppingCartPage;

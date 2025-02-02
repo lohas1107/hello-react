@@ -5,6 +5,7 @@ import ShoppingCartPage from "./ShoppingCartPage";
 import { api } from "../api/api";
 
 function ProductPage() {
+  // 商品列表
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
 
@@ -15,12 +16,29 @@ function ProductPage() {
         setPagination(res.data.pagination);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        alert(err.response.data);
       });
   };
 
   useEffect(() => {
     getProducts();
+  }, []);
+
+  // 購物車
+  const [cart, setCart] = useState([]);
+
+  const getCart = async () => {
+    await api.getCart()
+      .then((res) => {
+        setCart(res.data.cart);
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
+  };
+
+  useEffect(() => {
+    getCart();
   }, []);
 
   return (
@@ -39,7 +57,7 @@ function ProductPage() {
         </div>
         <div className="col-md-4">
           <div className="mt-5">
-            <ShoppingCartPage />
+            <ShoppingCartPage cart={cart} />
           </div>
         </div>
       </div>
