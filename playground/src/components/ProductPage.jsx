@@ -7,28 +7,26 @@ import * as bootstrap from 'bootstrap';
 import { admin } from '../api/admin';
 import { api } from '../api/api';
 
+const initProduct = {
+  id: "",
+  title: "",
+  category: "",
+  unit: "",
+  originPrice: 0,
+  price: 0,
+  description: "",
+  content: "",
+  isEnabled: false,
+  imageUrl: "",
+  imagesUrl: [],
+};
+
 function ProductPage() {
   const [isAuth, setIsAuth] = useState(false);
-
   const [products, setProducts] = useState([]);
   const [modalMode, setModalMode] = useState(null);
-  const productModalRef = useRef(null);
-
-  const initProduct = {
-    id: "",
-    title: "",
-    category: "",
-    unit: "",
-    originPrice: 0,
-    price: 0,
-    description: "",
-    content: "",
-    isEnabled: false,
-    imageUrl: "",
-    imagesUrl: [],
-  };
-
   const [formData, setFormData] = useState(initProduct);
+  const productModalRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
