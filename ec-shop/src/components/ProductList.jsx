@@ -5,8 +5,16 @@ function ProductList({
 }) {
 
   return (
-    <table>
-    <tbody>
+    <table className="table align-middle">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
       {products.map((product) => (
         <tr key={product.id}>
           <td>
