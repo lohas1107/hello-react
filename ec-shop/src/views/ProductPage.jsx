@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination";
+import ShoppingCartPage from "./ShoppingCartPage";
 import { api } from "../api/api";
 
 function ProductPage() {
@@ -24,14 +25,23 @@ function ProductPage() {
 
   return (
     <div className="container">
-      <div className="mt-4">
-        <ProductList products={products} />
-      </div>
-      <div className="mt-4">
-        <Pagination
-          pagination={pagination}
-          onPageChange={getProducts}
-        />
+      <div className="row">
+        <div className="col-md-8">
+          <div className="mt-4">
+            <ProductList products={products} />
+          </div>
+          <div className="mt-4">
+            <Pagination
+              pagination={pagination}
+              onPageChange={getProducts}
+            />
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="mt-5">
+            <ShoppingCartPage />
+          </div>
+        </div>
       </div>
     </div>
   );
