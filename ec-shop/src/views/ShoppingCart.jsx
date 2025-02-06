@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 
-function ShoppingCart({ cart }) {
+function ShoppingCart({
+  cart,
+  updateCart,
+}) {
 
   return (
     <>
@@ -31,7 +34,10 @@ function ShoppingCart({ cart }) {
                       type="number"
                       className="form-control"
                       min="1"
-                      defaultValue={item.qty} />
+                      defaultValue={item.qty}
+                      key={item.qty}
+                      onChange={(e) => { updateCart(item.id, Number(e.target.value)) }}
+                    />
                     <div className="input-group-text">{item.product.unit}</div>
                   </div>
                 </td>

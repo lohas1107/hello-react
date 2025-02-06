@@ -41,6 +41,16 @@ function ProductPage() {
       });
   };
 
+  const updateCart = async (productId, qty) => {
+    await api.updateCart(productId, qty)
+      .then(() => {
+        getCart();
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
+  };
+
   useEffect(() => {
     getProducts();
     getCart();
@@ -66,7 +76,10 @@ function ProductPage() {
         </div>
         <div className="col-md-4">
           <div className="mt-5">
-            <ShoppingCart cart={cart} />
+            <ShoppingCart
+              cart={cart}
+              updateCart={updateCart}
+            />
           </div>
         </div>
       </div>
