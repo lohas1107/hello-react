@@ -1,15 +1,29 @@
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ProductModal from "./ProductModel";
 import * as bootstrap from "bootstrap";
+import { api } from "../api/api";
 
 function ProductList({
   products,
   onAddToCart,
 }) {
   const productModalRef = useRef(null);
+  const [product, setProduct] = useState({});
+
+  const getProduct = async (productId) => {
+    await api
+      .getProduct(productId)
+      .then((response) => {
+        setProduct(response.data.product);
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
+  };
 
   const openModal = (productId) => {
+    getProduct(productId);
     productModalRef.current.show();
   };
 
@@ -21,7 +35,7 @@ function ProductList({
 
   return (
     <div className="container">
-      <ProductModal />
+      <ProductModal product={product} />
       <table className="table align-middle">
         <thead>
           <tr>

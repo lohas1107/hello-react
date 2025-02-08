@@ -5,6 +5,7 @@ const API_PATH = import.meta.env.VITE_API_PATH;
 
 export const api = {
   getProducts: (page = 1) => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/products?page=${page}`),
+  getProduct: (productId) => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/product/${productId}`),
 
   getCart: () => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/cart`),
   addToCart: (productId, qty) => axios.post(`${API_BASE_URL}/v2/api/${API_PATH}/cart`, { data: { product_id: productId, qty } }),
