@@ -9,4 +9,5 @@ export const api = {
   getCart: () => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/cart`),
   addToCart: (productId, qty) => axios.post(`${API_BASE_URL}/v2/api/${API_PATH}/cart`, { data: { product_id: productId, qty } }),
   updateCart: (productId, qty) => axios.put(`${API_BASE_URL}/v2/api/${API_PATH}/cart/${productId}`, { data: { product_id: productId, qty } }),
+  deleteCart: (productId) => axios.delete(`${API_BASE_URL}/v2/api/${API_PATH}/cart/${productId}`),
 };

@@ -51,6 +51,16 @@ function ProductPage() {
       });
   };
 
+  const deleteCart = async (productId) => {
+    await api.deleteCart(productId)
+      .then(() => {
+        getCart();
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
+  };
+
   useEffect(() => {
     getProducts();
     getCart();
@@ -79,6 +89,7 @@ function ProductPage() {
             <ShoppingCart
               cart={cart}
               updateCart={updateCart}
+              deleteCart={deleteCart}
             />
           </div>
         </div>

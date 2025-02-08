@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 function ShoppingCart({
   cart,
   updateCart,
+  deleteCart,
 }) {
-
   return (
     <>
       <div className="mt-3">
@@ -25,7 +25,10 @@ function ShoppingCart({
             cart?.carts.map((item) => (
               <tr key={item.id}>
                 <td>
-                  <button className="btn btn-outline-danger btn-sm">刪除</button>
+                  <button
+                    className="btn btn-outline-danger btn-sm"
+                    onClick={() => { deleteCart(item.id) }}
+                  >刪除</button>
                 </td>
                 <td>{item.product.title}</td>
                 <td>
@@ -58,6 +61,8 @@ function ShoppingCart({
 
 ShoppingCart.propTypes = {
   cart: PropTypes.object,
+  updateCart: PropTypes.func,
+  deleteCart: PropTypes.func,
 };
 
 export default ShoppingCart;
