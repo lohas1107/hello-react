@@ -61,6 +61,16 @@ function ProductPage() {
       });
   };
 
+  const clearCart = async () => {
+    await api.clearCart()
+      .then(() => {
+        getCart();
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
+  };
+
   useEffect(() => {
     getProducts();
     getCart();
@@ -90,6 +100,7 @@ function ProductPage() {
               cart={cart}
               updateCart={updateCart}
               deleteCart={deleteCart}
+              clearCart={clearCart}
             />
           </div>
         </div>

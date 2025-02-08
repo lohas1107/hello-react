@@ -4,11 +4,15 @@ function ShoppingCart({
   cart,
   updateCart,
   deleteCart,
+  clearCart,
 }) {
   return (
     <>
       <div className="mt-3">
-        <button className="btn btn-outline-danger">清空購物車</button>
+        <button
+          className="btn btn-outline-danger"
+          onClick={clearCart}
+        >清空購物車</button>
       </div>
 
       <table className="table align-middle">
@@ -63,6 +67,7 @@ ShoppingCart.propTypes = {
   cart: PropTypes.object,
   updateCart: PropTypes.func,
   deleteCart: PropTypes.func,
+  clearCart: PropTypes.func,
 };
 
 export default ShoppingCart;
