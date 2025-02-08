@@ -27,6 +27,10 @@ function ProductList({
     productModalRef.current.show();
   };
 
+  const closeModal = () => {
+    productModalRef.current.hide();
+  };
+
   useEffect(() => {
     productModalRef.current = new bootstrap.Modal("#productModal", {
       keyboard: false,
@@ -35,7 +39,11 @@ function ProductList({
 
   return (
     <div className="container">
-      <ProductModal product={product} />
+      <ProductModal
+        product={product}
+        onAddToCart={onAddToCart}
+        onCloseModal={closeModal}
+      />
       <table className="table align-middle">
         <thead>
           <tr>
@@ -59,8 +67,8 @@ function ProductList({
               </td>
               <td>{product.title}</td>
               <td>
-                <del className="h6">原價： {product.origin_price} 元</del>
-                <div className="h5">特價： {product.price} 元</div>
+                <del className="h6">原價：{product.origin_price} 元</del>
+                <div className="h5">特價：{product.price} 元</div>
               </td>
               <td>
                 <div className="btn-group btn-group-sm">

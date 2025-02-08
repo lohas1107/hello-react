@@ -1,6 +1,22 @@
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-function ProductModel({ product }) {
+function ProductModel({
+  product,
+  onAddToCart,
+  onCloseModal,
+}) {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = (productId, qty) => {
+    onAddToCart(productId, qty);
+    onCloseModal();
+  };
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [product]);
+
   return (
     <div
       id="productModal"
@@ -30,21 +46,24 @@ function ProductModel({ product }) {
                 className="btn btn-danger"
                 type="button"
                 aria-label="Decrease quantity"
+                onClick={() => setQuantity((pre) => (pre === 1 ? pre : pre - 1))}
               >
                 <i className="fa-solid fa-minus"></i>
               </button>
               <input
                 className="form-control"
                 type="number"
-                value={product.quantity}
                 min="1"
                 max="10"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
               />
               <button
                 id="button-addon2"
                 className="btn btn-primary"
                 type="button"
                 aria-label="Decrease quantity"
+                onClick={() => setQuantity((pre) => pre + 1)}
               >
                 <i className="fa-solid fa-plus"></i>
               </button>
@@ -55,12 +74,14 @@ function ProductModel({ product }) {
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
+              onClick={onCloseModal}
             >
               關閉
             </button>
             <button
               type="button"
               className="btn btn-primary"
+              onClick={() => handleAddToCart(product.id, quantity)}
             >
               加入購物車
             </button>
@@ -73,6 +94,8 @@ function ProductModel({ product }) {
 
 ProductModel.propTypes = {
   product: PropTypes.object,
+  onAddToCart: PropTypes.func,
+  onCloseModal: PropTypes.func,
 };
 
 export default ProductModel;
