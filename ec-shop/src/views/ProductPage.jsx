@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination";
 import ShoppingCart from "./ShoppingCart";
+import OrderForm from "./OrderForm";
 import { api } from "../api/api";
 
 function ProductPage() {
@@ -102,6 +103,9 @@ function ProductPage() {
               deleteCart={deleteCart}
               clearCart={clearCart}
             />
+          </div>
+          <div className="mt-5">
+            <OrderForm />
           </div>
         </div>
       </div>
