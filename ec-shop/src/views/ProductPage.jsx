@@ -105,7 +105,9 @@ function ProductPage() {
             />
           </div>
           <div className="mt-5">
-            <OrderForm />
+            <OrderForm
+              onSubmitCompleted={getCart}
+            />
           </div>
         </div>
       </div>

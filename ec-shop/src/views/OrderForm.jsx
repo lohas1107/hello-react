@@ -1,6 +1,29 @@
-function OrderForm() {
+import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
+import { api } from "../api/api";
+
+function OrderForm({ onSubmitCompleted }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    await api
+      .createOrder(data)
+      .then(() => {
+        onSubmitCompleted();
+        reset();
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           收件人姓名
@@ -10,7 +33,11 @@ function OrderForm() {
           type="text"
           className="form-control"
           placeholder="請輸入姓名"
+          {...register("name", { required: "請輸入收件人姓名。" })}
         />
+        {errors.name && (
+          <p className="text-danger">{errors.name.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="email" className="form-label">
@@ -21,7 +48,11 @@ function OrderForm() {
           type="email"
           className="form-control"
           placeholder="請輸入 Email"
+          {...register("email", { required: "請輸入收件人 Email。" })}
         />
+        {errors.email && (
+          <p className="text-danger">{errors.email.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="tel" className="form-label">
@@ -32,7 +63,21 @@ function OrderForm() {
           type="tel"
           className="form-control"
           placeholder="請輸入電話"
+          {...register("tel", { 
+            required: "請輸入收件人電話。",
+            minLength: {
+              value: 8,
+              message: "電話號碼至少需要 8 碼。",
+            },
+            pattern: {
+              value: /^\d+$/,
+              message: "電話號碼格式不正確，僅限數字。",
+            },
+          })}
         />
+        {errors.tel && (
+          <p className="text-danger">{errors.tel.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="address" className="form-label">
@@ -43,7 +88,11 @@ function OrderForm() {
           type="text"
           className="form-control"
           placeholder="請輸入地址"
+          {...register("address", { required: "請輸入收件人地址。" })}
         />
+        {errors.address && (
+          <p className="text-danger">{errors.address.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="message" className="form-label">
@@ -54,6 +103,7 @@ function OrderForm() {
           className="form-control"
           placeholder="留言"
           rows="3"
+          {...register("message")}
         />
       </div>
       <div className="text-end">
@@ -64,5 +114,9 @@ function OrderForm() {
     </form>
   );
 }
+
+OrderForm.propTypes = {
+  onSubmitCompleted: PropTypes.func.isRequired,
+};
 
 export default OrderForm;
