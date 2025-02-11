@@ -18,7 +18,7 @@ function ProductPage() {
         setPagination(res.data.pagination);
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err.response.data.message);
       });
   };
 
@@ -28,7 +28,7 @@ function ProductPage() {
         setCart(res.data.data);
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err.response.data.message);
       });
   };
 
@@ -38,7 +38,7 @@ function ProductPage() {
         getCart();
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err.response.data.message);
       });
   };
 
@@ -48,7 +48,7 @@ function ProductPage() {
         getCart();
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err.response.data.message);
       });
   };
 
@@ -58,7 +58,7 @@ function ProductPage() {
         getCart();
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err.response.data.message);
       });
   };
 
@@ -68,7 +68,7 @@ function ProductPage() {
         getCart();
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err.response.data.message);
       });
   };
 

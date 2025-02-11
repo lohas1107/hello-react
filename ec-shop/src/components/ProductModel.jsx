@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import LoadingButton from "./LoadingButton";
 import PropTypes from "prop-types";
 
 function ProductModel({
@@ -8,8 +9,8 @@ function ProductModel({
 }) {
   const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCart = (productId, qty) => {
-    onAddToCart(productId, qty);
+  const handleAddToCart = async (productId, qty) => {
+    await onAddToCart(productId, qty);
     onCloseModal();
   };
 
@@ -78,13 +79,12 @@ function ProductModel({
             >
               關閉
             </button>
-            <button
-              type="button"
-              className="btn btn-primary"
+            <LoadingButton
+              text="加入購物車"
+              buttonClassName="btn btn-primary"
+              spinnerColor="#fff"
               onClick={() => handleAddToCart(product.id, quantity)}
-            >
-              加入購物車
-            </button>
+            />
           </div>
         </div>
       </div>

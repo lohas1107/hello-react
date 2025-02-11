@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ProductModal from "./ProductModel";
+import LoadingButton from "./LoadingButton";
 import * as bootstrap from "bootstrap";
 import { api } from "../api/api";
 
@@ -22,8 +23,8 @@ function ProductList({
       });
   };
 
-  const openModal = (productId) => {
-    getProduct(productId);
+  const openModal = async (productId) => {
+    await getProduct(productId);
     productModalRef.current.show();
   };
 
@@ -72,14 +73,18 @@ function ProductList({
               </td>
               <td>
                 <div className="btn-group btn-group-sm">
-                  <button
-                    className="btn btn-outline-secondary"
+                  <LoadingButton
+                    text="查看更多"
+                    buttonClassName="btn btn-outline-secondary"
+                    spinnerColor="#6c757d"
                     onClick={() => openModal(product.id)}
-                  >查看更多</button>
-                  <button
-                    className="btn btn-outline-danger"
+                  />
+                  <LoadingButton
+                    text="加入購物車"
+                    buttonClassName="btn btn-outline-danger"
+                    spinnerColor="#dc3545"
                     onClick={() => onAddToCart(product.id, 1)}
-                  >加入購物車</button>
+                  />
                 </div>
               </td>
             </tr>

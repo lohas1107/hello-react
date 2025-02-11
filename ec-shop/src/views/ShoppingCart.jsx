@@ -1,3 +1,4 @@
+import LoadingButton from "../components/LoadingButton";
 import PropTypes from 'prop-types';
 
 function ShoppingCart({
@@ -9,10 +10,11 @@ function ShoppingCart({
   return (
     <>
       <div className="mt-3">
-        <button
-          className="btn btn-outline-danger"
+        <LoadingButton
+          text="清空購物車"
+          buttonClassName="btn btn-outline-danger"
           onClick={clearCart}
-        >清空購物車</button>
+        />
       </div>
 
       <table className="table align-middle">
@@ -29,10 +31,12 @@ function ShoppingCart({
             cart?.carts.map((item) => (
               <tr key={item.id}>
                 <td>
-                  <button
-                    className="btn btn-outline-danger btn-sm"
+                  <LoadingButton
+                    text="刪除"
+                    buttonClassName="btn btn-outline-danger btn-sm"
+                    spinnerColor="#dc3545"
                     onClick={() => { deleteCart(item.id) }}
-                  >刪除</button>
+                  />
                 </td>
                 <td>{item.product.title}</td>
                 <td>

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import LoadingButton from "../components/LoadingButton";
 import PropTypes from "prop-types";
 import { api } from "../api/api";
 
@@ -107,9 +108,12 @@ function OrderForm({ onSubmitCompleted }) {
         />
       </div>
       <div className="text-end">
-        <button type="submit" className="btn btn-danger">
-          送出訂單
-        </button>
+        <LoadingButton
+          type="submit"
+          text="送出訂單"
+          buttonClassName="btn btn-danger"
+          spinnerColor="#fff"
+        />
       </div>
     </form>
   );
