@@ -5,7 +5,7 @@ import Pagination from "../components/Pagination";
 import LoadingButton from "../components/LoadingButton";
 import { api } from "../api/api";
 
-function ProductList({
+function ProductListPage({
   onAddToCart,
 }) {
   const [products, setProducts] = useState([]);
@@ -86,8 +86,8 @@ function ProductList({
   );
 }
 
-ProductList.propTypes = {
+ProductListPage.propTypes = {
   onAddToCart: PropTypes.func,
 };
 
-export default ProductList;
+export default ProductListPage;

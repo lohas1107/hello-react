@@ -4,7 +4,7 @@ import LoadingButton from "../components/LoadingButton";
 import PropTypes from "prop-types";
 import { api } from "../api/api";
 
-function ProductModel({
+function ProductInfoPage({
   onAddToCart,
 }) {
   const location = useLocation();
@@ -83,8 +83,8 @@ function ProductModel({
   );
 }
 
-ProductModel.propTypes = {
+ProductInfoPage.propTypes = {
   onAddToCart: PropTypes.func,
 };
 
-export default ProductModel;
+export default ProductInfoPage;
