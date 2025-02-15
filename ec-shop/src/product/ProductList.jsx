@@ -1,16 +1,29 @@
 import { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ProductModal from "./ProductModel";
-import LoadingButton from "./LoadingButton";
+import Pagination from "../components/Pagination";
+import LoadingButton from "../components/LoadingButton";
 import * as bootstrap from "bootstrap";
 import { api } from "../api/api";
 
 function ProductList({
-  products,
   onAddToCart,
 }) {
+  const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({});
   const productModalRef = useRef(null);
   const [product, setProduct] = useState({});
+
+  const getProducts = async (page = 1) => {
+    await api.getProducts(page)
+      .then((res) => {
+        setProducts(res.data.products);
+        setPagination(res.data.pagination);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
 
   const getProduct = async (productId) => {
     await api
@@ -33,6 +46,7 @@ function ProductList({
   };
 
   useEffect(() => {
+    getProducts();
     productModalRef.current = new bootstrap.Modal("#productModal", {
       keyboard: false,
     });
@@ -91,13 +105,19 @@ function ProductList({
           ))}
         </tbody>
       </table>
+      <div className="mt-4">
+        <Pagination
+          pagination={pagination}
+          onPageChange={getProducts}
+          onAddToCart={onAddToCart}
+        />
+      </div>
     </div>
   );
 }
 
 ProductList.propTypes = {
-  products: PropTypes.array.isRequired,
-  onAddToCart: PropTypes.func.isRequired,
+  onAddToCart: PropTypes.func,
 };
 
 export default ProductList;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import LoadingButton from "./LoadingButton";
+import LoadingButton from "../components/LoadingButton";
 import PropTypes from "prop-types";
 
 function ProductModel({

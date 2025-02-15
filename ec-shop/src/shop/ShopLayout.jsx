@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 export default function ShopLayout() {
   return (
@@ -18,10 +18,10 @@ export default function ShopLayout() {
               <div className="d-flex flex-column flex-md-row justify-content-md-end align-items-start align-items-md-center">
                 <nav className="mb-3 mb-md-0 me-md-4">
                   <div className="d-flex flex-column flex-md-row">
-                    <a href="/products" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
+                    <Link to="/products" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                       商品列表
-                    </a>
-                    <a href="/categories" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
+                    </Link>
+                    <a href="#" onClick={(e) => {e.preventDefault(); alert('Coming soon!')}} className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                       商品分類
                     </a>
                     <a href="/about" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
@@ -55,13 +55,13 @@ export default function ShopLayout() {
             <h5 className="mb-3">購物說明</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <a href="/shipping" className="text-decoration-none text-muted">配送方式</a>
+                <a href="#" className="text-decoration-none text-muted">配送方式</a>
               </li>
               <li className="mb-2">
-                <a href="/payment" className="text-decoration-none text-muted">付款方式</a>
+                <a href="#" className="text-decoration-none text-muted">付款方式</a>
               </li>
               <li className="mb-2">
-                <a href="/return" className="text-decoration-none text-muted">退換貨政策</a>
+                <a href="#" className="text-decoration-none text-muted">退換貨政策</a>
               </li>
             </ul>
           </div>
@@ -72,10 +72,10 @@ export default function ShopLayout() {
                 <a href="/about" className="text-decoration-none text-muted">品牌故事</a>
               </li>
               <li className="mb-2">
-                <a href="/contact" className="text-decoration-none text-muted">聯絡我們</a>
+                <a href="#" className="text-decoration-none text-muted">聯絡我們</a>
               </li>
               <li className="mb-2">
-                <a href="/privacy" className="text-decoration-none text-muted">隱私權政策</a>
+                <a href="#" className="text-decoration-none text-muted">隱私權政策</a>
               </li>
             </ul>
           </div>

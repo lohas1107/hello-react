@@ -26,7 +26,7 @@ export default function HomePage() {
             <div className="h-100 p-5 text-white bg-dark rounded-3">
               <h2>新品上市</h2>
               <p>探索最新上架的精選商品，走在時尚尖端。</p>
-              <button className="btn btn-outline-light" type="button">
+              <button className="btn btn-outline-light" type="button" onClick={() => alert('Coming soon!')}>
                 查看更多
               </button>
             </div>
@@ -35,7 +35,7 @@ export default function HomePage() {
             <div className="h-100 p-5 bg-light border rounded-3">
               <h2>熱銷推薦</h2>
               <p>精選最受歡迎的商品，讓您輕鬆找到心儀之選。</p>
-              <button className="btn btn-outline-secondary" type="button">
+              <button className="btn btn-outline-secondary" type="button" onClick={() => alert('Coming soon!')}>
                 查看更多
               </button>
             </div>
