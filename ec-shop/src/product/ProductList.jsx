@@ -1,9 +1,8 @@
-import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ProductModal from "./ProductModel";
 import Pagination from "../components/Pagination";
 import LoadingButton from "../components/LoadingButton";
-import * as bootstrap from "bootstrap";
 import { api } from "../api/api";
 
 function ProductList({
@@ -11,8 +10,6 @@ function ProductList({
 }) {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
-  const productModalRef = useRef(null);
-  const [product, setProduct] = useState({});
 
   const getProducts = async (page = 1) => {
     await api.getProducts(page)
@@ -25,40 +22,14 @@ function ProductList({
       });
   };
 
-  const getProduct = async (productId) => {
-    await api
-      .getProduct(productId)
-      .then((response) => {
-        setProduct(response.data.product);
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
-  };
-
-  const openModal = async (productId) => {
-    await getProduct(productId);
-    productModalRef.current.show();
-  };
-
-  const closeModal = () => {
-    productModalRef.current.hide();
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProducts();
-    productModalRef.current = new bootstrap.Modal("#productModal", {
-      keyboard: false,
-    });
   }, []);
 
   return (
     <div className="container">
-      <ProductModal
-        product={product}
-        onAddToCart={onAddToCart}
-        onCloseModal={closeModal}
-      />
       <table className="table align-middle">
         <thead>
           <tr>
@@ -91,7 +62,7 @@ function ProductList({
                     text="查看更多"
                     buttonClassName="btn btn-outline-secondary"
                     spinnerColor="#6c757d"
-                    onClick={() => openModal(product.id)}
+                    onClick={() => navigate(`/products/${product.id}`, { state: { productId: product.id } })}
                   />
                   <LoadingButton
                     text="加入購物車"
@@ -109,7 +80,6 @@ function ProductList({
         <Pagination
           pagination={pagination}
           onPageChange={getProducts}
-          onAddToCart={onAddToCart}
         />
       </div>
     </div>
