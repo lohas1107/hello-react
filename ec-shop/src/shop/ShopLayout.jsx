@@ -24,9 +24,9 @@ export default function ShopLayout() {
                     <a href="#" onClick={(e) => {e.preventDefault(); alert('Coming soon!')}} className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                       商品分類
                     </a>
-                    <a href="/about" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
+                    <Link to="/about" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                       關於我們
-                    </a>
+                    </Link>
                     <a href="/cart" className="btn btn-outline-dark mb-2 mb-md-0">
                       購物車
                     </a>
@@ -69,7 +69,7 @@ export default function ShopLayout() {
             <h5 className="mb-3">關於我們</h5>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <a href="/about" className="text-decoration-none text-muted">品牌故事</a>
+                <a href="/ec-shop/#/about" className="text-decoration-none text-muted">品牌故事</a>
               </li>
               <li className="mb-2">
                 <a href="#" className="text-decoration-none text-muted">聯絡我們</a>

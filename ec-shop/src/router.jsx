@@ -3,6 +3,7 @@ import ShopLayout from "./shop/ShopLayout";
 import HomePage from "./home/HomePage";
 import ProductListPage from "./product/ProductListPage";
 import ProductInfoPage from "./product/ProductInfoPage";
+import AboutPage from "./about/AboutPage";
 import ErrorPage from "./shop/ErrorPage";
 
 export const router = createHashRouter([
@@ -21,6 +22,10 @@ export const router = createHashRouter([
       {
         path: "products/:id",
         element: <ProductInfoPage />,
+      },
+      {
+        path: "about",
+        element: <AboutPage />,
       },
     ],
   },
