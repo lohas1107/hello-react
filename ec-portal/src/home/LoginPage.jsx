@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ProductPage from './ProductPage';
+import ProductPage from '../product/ProductPage';
 import { admin } from '../api/admin';
 
 const LoginPage = () => {

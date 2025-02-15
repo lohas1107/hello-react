@@ -1,7 +1,7 @@
 import { createHashRouter } from "react-router-dom";
 import PortalLayout from "./shared/PortalLayout";
-import LoginPage from "./views/LoginPage";
-import ProductPage from "./views/ProductPage";
+import LoginPage from "./home/LoginPage";
+import ProductPage from "./product/ProductPage";
 import ErrorPage from "./shared/ErrorPage";
 
 export const router = createHashRouter([
