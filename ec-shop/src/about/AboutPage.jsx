@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function AboutPage() {
   return (
     <div className="container py-5">
@@ -72,9 +74,9 @@ export default function AboutPage() {
           <p className="text-muted mb-4">
             我們期待能成為您生活中的好夥伴，一同探索質感生活的無限可能。
           </p>
-          <a href="/#/products" className="btn btn-primary">
+          <Link to="/products" className="btn btn-primary">
             開始選購
-          </a>
+          </Link>
         </div>
       </div>
     </div>

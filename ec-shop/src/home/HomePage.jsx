@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <div className="container py-4">
       <header className="mb-5">
@@ -12,7 +16,7 @@ export default function HomePage() {
             <button
               className="btn btn-primary btn-lg"
               type="button"
-              onClick={() => (window.location.href = "/#/products")}
+              onClick={() => navigate("/products")}
             >
               立即選購
             </button>

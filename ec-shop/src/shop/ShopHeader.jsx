@@ -8,12 +8,12 @@ export default function ShopHeader() {
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-4 mb-3 mb-md-0">
-            <a href="/#/" className="text-decoration-none">
+            <Link to="/" className="text-decoration-none">
               <h1 className="h3 mb-0 text-dark d-flex align-items-center">
                 <span className="me-2">質感。選物</span>
                 <small className="text-muted fs-6 fw-light">Elegant Select</small>
               </h1>
-            </a>
+            </Link>
           </div>
           <div className="col-12 col-md-8">
             <div className="d-flex flex-column flex-md-row justify-content-md-end align-items-start align-items-md-center">
