@@ -1,13 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Pagination from "../components/Pagination";
 import LoadingButton from "../components/LoadingButton";
 import { api } from "../api/api";
 
-function ProductListPage({
-  onAddToCart,
-}) {
+function ProductListPage() {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
 
@@ -17,6 +14,13 @@ function ProductListPage({
         setProducts(res.data.products);
         setPagination(res.data.pagination);
       })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+
+  const addToCart = async (productId, qty) => {
+    await api.addToCart(productId, qty)
       .catch((err) => {
         alert(err.response.data.message);
       });
@@ -64,7 +68,7 @@ function ProductListPage({
                       text="加入購物車"
                       buttonClassName="btn btn-dark"
                       spinnerColor="#ffffff"
-                      onClick={() => onAddToCart(product.id, 1)}
+                      onClick={() => addToCart(product.id, 1)}
                     />
                   </div>
                 </div>
@@ -79,9 +83,5 @@ function ProductListPage({
     </div>
   );
 }
-
-ProductListPage.propTypes = {
-  onAddToCart: PropTypes.func,
-};
 
 export default ProductListPage;

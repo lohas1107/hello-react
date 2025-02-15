@@ -16,16 +16,6 @@ function ShoppingCartPage() {
       });
   };
 
-  const addToCart = async (productId, qty) => {
-    await api.addToCart(productId, qty)
-      .then(() => {
-        getCart();
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-      });
-  };
-
   const updateCart = async (productId, qty) => {
     await api.updateCart(productId, qty)
       .then(() => {

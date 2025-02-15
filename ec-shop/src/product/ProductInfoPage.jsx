@@ -1,12 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import LoadingButton from "../components/LoadingButton";
-import PropTypes from "prop-types";
 import { api } from "../api/api";
 
-function ProductInfoPage({
-  onAddToCart,
-}) {
+function ProductInfoPage() {
   const location = useLocation();
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -24,8 +21,11 @@ function ProductInfoPage({
       });
   }, [location.pathname]);
 
-  const handleAddToCart = async (productId, qty) => {
-    await onAddToCart(productId, qty);
+  const addToCart = async (productId, qty) => {
+    await api.addToCart(productId, qty)
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
   };
 
   useEffect(() => {
@@ -75,16 +75,12 @@ function ProductInfoPage({
             text="加入購物車"
             buttonClassName="btn btn-primary"
             spinnerColor="#ffffff"
-            onClick={() => handleAddToCart(product.id, quantity)}
+            onClick={() => addToCart(product.id, quantity)}
           />
         </div>
       </div>
     </div>
   );
 }
-
-ProductInfoPage.propTypes = {
-  onAddToCart: PropTypes.func,
-};
 
 export default ProductInfoPage;
