@@ -1,9 +1,8 @@
-import ProductPage from "./views/ProductPage";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 
 function App() {
-  return (
-    <ProductPage />
-  )
+  return <RouterProvider router={router} />;
 }
 
 export default App
