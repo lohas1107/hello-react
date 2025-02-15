@@ -19,7 +19,7 @@ export default function PortalHeader() {
             <div className="d-flex flex-column flex-md-row justify-content-md-end align-items-start align-items-md-center">
               <nav className="mb-3 mb-md-0 me-md-4">
                 <div className="d-flex flex-column flex-md-row">
-                  <Link to="/products" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
+                  <Link to="/admin/products" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                     商品列表
                   </Link>
                 </div>

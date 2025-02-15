@@ -2,10 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import ProductList from './ProductList'
 import Pagination from '../components/Pagination'
 import ProductModal from './ProductModal';
-import LoginPage from '../home/LoginPage'
 import * as bootstrap from 'bootstrap';
-
-import { admin } from '../api/admin';
 import { api } from '../api/api';
 
 const initProduct = {
@@ -23,7 +20,6 @@ const initProduct = {
 };
 
 function ProductPage() {
-  const [isAuth, setIsAuth] = useState(false);
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
 
@@ -32,12 +28,6 @@ function ProductPage() {
   const productModalRef = useRef(null);
 
   useEffect(() => {
-    const init = async () => {
-      const isLoggedIn = await admin.checkLogin();
-      setIsAuth(isLoggedIn);
-    };
-    init();
-
     getProducts();
 
     productModalRef.current = new bootstrap.Modal('#productModal', {
@@ -130,30 +120,25 @@ function ProductPage() {
 
   return (
     <>
-      {isAuth
-        ? (
-          <div className="container">
-            <div className="text-end mt-4">
-              <button
-                className="btn btn-primary"
-                onClick={() => openModal('create', initProduct)}>
-                建立產品
-              </button>
-            </div>
-            <div className="mt-4">
-              <ProductList
-                products={products}
-                onEditProduct={openModal}
-              />
-            </div>
-            <Pagination
-              pagination={pagination}
-              onPageChange={getProducts}
-            />
-          </div>
-        )
-        : (<LoginPage />)
-      }
+      <div className="container">
+        <div className="mt-4">
+          <button
+            className="btn btn-primary"
+            onClick={() => openModal('create', initProduct)}>
+            建立產品
+          </button>
+        </div>
+        <div className="mt-4">
+          <ProductList
+            products={products}
+            onEditProduct={openModal}
+          />
+        </div>
+        <Pagination
+          pagination={pagination}
+          onPageChange={getProducts}
+        />
+      </div>
 
       <ProductModal
         mode={modalMode}

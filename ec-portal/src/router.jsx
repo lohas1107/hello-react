@@ -6,18 +6,18 @@ import ErrorPage from "./shared/ErrorPage";
 
 export const router = createHashRouter([
   {
-    path: "/",
+    index: true,
+    element: <LoginPage />,
+  },
+  {
+    path: "/admin",
     element: <PortalLayout />,
     children: [
-      {
-        index: true,
-        element: <LoginPage />,
-      },
       {
         path: "products",
         element: <ProductPage />,
       },
-    ],
+    ]
   },
   {
     path: "*",

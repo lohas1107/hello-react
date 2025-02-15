@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { admin } from '../api/admin';
 
@@ -9,17 +10,27 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     await admin.login(data)
       .then(() => {
-        navigate("/products");
+        navigate("/admin/products");
       })
       .catch((err) => {
         alert(err.response.data.message);
       });
-  };
+  }
+
+  useEffect(() => {
+    (async () => {
+      const isAuth = await admin.checkLogin();
+      if (isAuth) {
+        navigate("/admin/products");
+      }
+    })();
+  }, [navigate]);
 
   return (
     <div className="container py-4">
       <div className="row justify-content-center">
         <div className="col-md-6">
+          <h1 className="mb-4">管理後台</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-floating mb-3">
               <input
