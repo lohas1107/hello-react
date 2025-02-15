@@ -1,12 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import ShopLayout from "./shop/ShopLayout";
 import HomePage from "./home/HomePage";
 import ProductPage from "./views/ProductPage";
-import ErrorPage from "./views/ErrorPage";
+import ErrorPage from "./shop/ErrorPage";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
-    path: "/ec-shop/",
+    path: "/",
     element: <ShopLayout />,
     children: [
       {

@@ -6,13 +6,13 @@ export default function HomePage() {
           <div className="container-fluid py-5">
             <h1 className="display-5 fw-bold">質感。選物</h1>
             <p className="col-md-8 fs-4">
-              探索我們精心挑選的商品系列，為您的生活增添品味與風格。每一件商品都經過嚴格篩選，
-              確保品質與設計兼具。
+              探索我們精心挑選的商品系列，為您的生活增添品味與風格。 <br />
+              每一件商品都經過嚴格篩選，確保品質與設計兼具。
             </p>
             <button
               className="btn btn-primary btn-lg"
               type="button"
-              onClick={() => (window.location.href = "/ec-shop/products")}
+              onClick={() => (window.location.href = "/#/products")}
             >
               立即選購
             </button>
