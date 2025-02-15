@@ -29,58 +29,52 @@ function ProductListPage({
   }, []);
 
   return (
-    <div className="container">
-      <table className="table align-middle">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>
-                <div style={{
-                  height: "100px",
-                  width: "100px",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+    <div className="container py-2">
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {products.map((product) => (
+          <div key={product.id} className="col">
+            <div className="card h-100 border-0 shadow-sm">
+              <div
+                className="card-img-top"
+                style={{
+                  height: "300px",
                   backgroundImage: `url(${product.imageUrl})`,
-                }} />
-              </td>
-              <td>{product.title}</td>
-              <td>
-                <del className="h6">原價：{product.origin_price} 元</del>
-                <div className="h5">特價：{product.price} 元</div>
-              </td>
-              <td>
-                <div className="btn-group btn-group-sm">
-                  <LoadingButton
-                    text="查看更多"
-                    buttonClassName="btn btn-outline-secondary"
-                    spinnerColor="#6c757d"
-                    onClick={() => navigate(`/products/${product.id}`, { state: { productId: product.id } })}
-                  />
-                  <LoadingButton
-                    text="加入購物車"
-                    buttonClassName="btn btn-outline-danger"
-                    spinnerColor="#dc3545"
-                    onClick={() => onAddToCart(product.id, 1)}
-                  />
+                  backgroundSize: "cover",
+                  backgroundPosition: "center"
+                }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{product.title}</h5>
+                <p className="card-text text-muted">{product.description}</p>
+              </div>
+              <div className="card-footer bg-white border-top-0 pb-4">
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <del className="text-muted me-2">NT$ {product.origin_price}</del>
+                    <span className="h5 text-danger mb-0">NT$ {product.price}</span>
+                  </div>
+                  <div className="btn-group">
+                    <LoadingButton
+                      text="查看商品"
+                      buttonClassName="btn btn-outline-dark"
+                      spinnerColor="#212529"
+                      onClick={() => navigate(`/products/${product.id}`, { state: { productId: product.id } })}
+                    />
+                    <LoadingButton
+                      text="加入購物車"
+                      buttonClassName="btn btn-dark"
+                      spinnerColor="#ffffff"
+                      onClick={() => onAddToCart(product.id, 1)}
+                    />
+                  </div>
                 </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="mt-4">
-        <Pagination
-          pagination={pagination}
-          onPageChange={getProducts}
-        />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-5">
+        <Pagination pagination={pagination} onPageChange={getProducts} />
       </div>
     </div>
   );

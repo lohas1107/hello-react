@@ -11,23 +11,23 @@ function Pagination({
 
   return (
     <nav>
-      <ul className="pagination">
-        <li className="page-item">
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${!pagination.has_pre ? 'disabled' : ''}`}>
           <a
             href="/"
             aria-label="Previous"
-            className={`page-link ${pagination.has_pre ? '' : 'disabled'}`}
+            className="page-link"
             onClick={(event) => handlePageChange(event, pagination.current_page - 1)}
           >
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
 
-        {[...new Array(pagination.total_pages)].map((_, i) => (
-          <li className="page-item" key={`${i}_page`}>
+        {[...Array(pagination.total_pages)].map((_, i) => (
+          <li className={`page-item ${i + 1 === pagination.current_page ? 'active' : ''}`} key={`${i}_page`}>
             <a
               href="/"
-              className={`page-link ${i + 1 === pagination.current_page && 'active'}`}
+              className="page-link"
               onClick={(event) => handlePageChange(event, i + 1)}
             >
               {i + 1}
@@ -35,11 +35,11 @@ function Pagination({
           </li>
         ))}
 
-        <li className="page-item">
+        <li className={`page-item ${!pagination.has_next ? 'disabled' : ''}`}>
           <a
             href="/"
             aria-label="Next"
-            className={`page-link ${pagination.has_next ? '' : 'disabled'}`}
+            className="page-link"
             onClick={(event) => handlePageChange(event, pagination.current_page + 1)}
           >
             <span aria-hidden="true">&raquo;</span>
