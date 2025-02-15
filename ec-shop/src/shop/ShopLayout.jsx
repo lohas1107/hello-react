@@ -27,9 +27,9 @@ export default function ShopLayout() {
                     <Link to="/about" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                       關於我們
                     </Link>
-                    <a href="/cart" className="btn btn-outline-dark mb-2 mb-md-0">
+                    <Link to="/cart" className="btn btn-outline-dark mb-2 mb-md-0">
                       購物車
-                    </a>
+                    </Link>
                   </div>
                 </nav>
                 <div className="border-start ps-md-4">

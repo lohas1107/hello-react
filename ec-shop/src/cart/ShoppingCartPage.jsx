@@ -1,26 +1,10 @@
 import { useState, useEffect } from "react";
-import ProductList from "../components/ProductList";
-import Pagination from "../components/Pagination";
 import ShoppingCart from "./ShoppingCart";
 import OrderForm from "./OrderForm";
 import { api } from "../api/api";
 
-function ProductPage() {
-  const [products, setProducts] = useState([]);
-  const [pagination, setPagination] = useState({});
-
+function ShoppingCartPage() {
   const [cart, setCart] = useState({});
-
-  const getProducts = async (page = 1) => {
-    await api.getProducts(page)
-      .then((res) => {
-        setProducts(res.data.products);
-        setPagination(res.data.pagination);
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-      });
-  };
 
   const getCart = async () => {
     await api.getCart()
@@ -73,41 +57,32 @@ function ProductPage() {
   };
 
   useEffect(() => {
-    getProducts();
     getCart();
   }, []);
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-8">
-          <div className="mt-4">
-            <ProductList
-              products={products}
-              onAddToCart={addToCart}
-            />
-          </div>
-          <div className="mt-4">
-            <Pagination
-              pagination={pagination}
-              onPageChange={getProducts}
-              onAddToCart={addToCart}
-            />
+      <div className="row g-4">
+        <div className="col-lg">
+          <div className="card border-1">
+            <div className="card-body">
+              <ShoppingCart
+                cart={cart}
+                updateCart={updateCart}
+                deleteCart={deleteCart}
+                clearCart={clearCart}
+              />
+            </div>
           </div>
         </div>
-        <div className="col-md-4">
-          <div className="mt-5">
-            <ShoppingCart
-              cart={cart}
-              updateCart={updateCart}
-              deleteCart={deleteCart}
-              clearCart={clearCart}
-            />
-          </div>
-          <div className="mt-5">
-            <OrderForm
-              onSubmitCompleted={getCart}
-            />
+      </div>
+      <div className="row g-4 mt-4">
+        <div className="col-lg">
+          <div className="card border-1">
+            <div className="card-body">
+              <h5 className="card-title mb-4">訂購資訊</h5>
+              <OrderForm onSubmitCompleted={getCart} />
+            </div>
           </div>
         </div>
       </div>
@@ -115,4 +90,4 @@ function ProductPage() {
   );
 }
 
-export default ProductPage;
+export default ShoppingCartPage;
