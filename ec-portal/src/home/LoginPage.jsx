@@ -1,54 +1,54 @@
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { admin } from '../api/admin';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = async (e) => {
-    // Prevent form from submitting and refreshing the page, 
-    // so we can handle the submission with JavaScript
-    e.preventDefault();
-
-    const formData = {
-      username: e.target.elements[0].value,
-      password: e.target.elements[1].value
-    };
-
-    await admin.login(formData)
+  const onSubmit = async (data) => {
+    await admin.login(data)
       .then(() => {
         navigate("/products");
       })
       .catch((err) => {
         alert(err.response.data.message);
       });
-  }
+  };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          <h1>登入</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="form-floating mb-2">
+    <div className="container py-4">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-floating mb-3">
               <input
+                id="username"
                 type="email"
                 className="form-control"
-                id="username"
+                placeholder="name@example.com"
                 required
                 autoFocus
+                {...register("username", { required: "請輸入電子信箱" })}
               />
               <label htmlFor="username">Email</label>
             </div>
-            <div className="form-floating mb-2">
+            <div className="form-floating mb-4">
               <input
+                id="password"
                 type="password"
                 className="form-control"
-                id="password"
+                placeholder="Password"
                 required
+                {...register("password", { required: "請輸入密碼" })}
               />
               <label htmlFor="password">Password</label>
             </div>
-            <button className="btn btn-primary" type="submit">登入</button>
+            <div className="d-grid">
+              <button className="btn btn-primary btn-lg" type="submit">
+                登入
+              </button>
+            </div>
           </form>
         </div>
       </div>
