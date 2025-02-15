@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const PORTAL_BASE_URL = import.meta.env.VITE_PORTAL_BASE_URL;
+
 export default function ShopHeader() {
   return (
     <header className="py-3 mb-4 border-bottom">
@@ -32,8 +34,8 @@ export default function ShopHeader() {
                 </div>
               </nav>
               <div className="border-start ps-md-4">
-                <a href="/login" className="btn btn-dark">
-                  登入
+                <a href={`${PORTAL_BASE_URL}/#/`} className="btn btn-dark">
+                  登入後台
                 </a>
               </div>
             </div>
