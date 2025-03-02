@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import PortalHeader from "./PortalHeader";
 import PortalFooter from "./PortalFooter";
+import Toast from "../components/Toast";
 import { admin } from "../api/admin";
 
 const PortalLayout = () => {
@@ -18,6 +19,7 @@ const PortalLayout = () => {
       <PortalHeader />
       <Outlet />
       <PortalFooter />
+      <Toast />
     </div>
   );
 };
