@@ -5,6 +5,7 @@ const API_PATH = import.meta.env.VITE_API_PATH;
 
 export const api = {
   signIn: (formData) => axios.post(`${API_BASE_URL}/v2/admin/signin`, formData),
+  logout: () => axios.post(`${API_BASE_URL}/v2/logout`),
   checkLogin: () => axios.post(`${API_BASE_URL}/v2/api/user/check`),
 
   getProducts: (page = 1) => axios.get(`${API_BASE_URL}/v2/api/${API_PATH}/admin/products?page=${page}`),

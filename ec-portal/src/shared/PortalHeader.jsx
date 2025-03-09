@@ -1,8 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { api } from "../api/api";
+import { useDispatch } from "react-redux";
+import { pushMessage } from "../redux/toastSlice";
 
 const SHOP_BASE_URL = import.meta.env.VITE_SHOP_BASE_URL;
 
 export default function PortalHeader() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    api.logout()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        dispatch(pushMessage({
+          text: err.response.data.message,
+          status: "failed",
+        }));
+      });
+  }
+
   return (
     <header className="py-3 mb-4 border-bottom">
       <div className="container">
@@ -22,12 +41,13 @@ export default function PortalHeader() {
                   <Link to="/admin/products" className="btn btn-link text-dark text-decoration-none mb-2 mb-md-0 me-md-3">
                     商品列表
                   </Link>
+                  <a href={`${SHOP_BASE_URL}/#/`} className="btn btn-link text-dark text-decoration-none">
+                    檢視商店
+                  </a>
                 </div>
               </nav>
               <div className="border-start ps-md-4">
-                <a href={`${SHOP_BASE_URL}/#/`} className="btn btn-dark">
-                  檢視商店
-                </a>
+                <button className="btn btn-dark" onClick={handleLogout}>登出</button>
               </div>
             </div>
           </div>
