@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux';
+import { pushMessage } from '../redux/toastSlice';
 import ProductList from './ProductList'
 import Pagination from '../components/Pagination'
 import ProductModal from './ProductModal';
@@ -27,6 +29,8 @@ function ProductPage() {
   const [formData, setFormData] = useState(initProduct);
   const productModalRef = useRef(null);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getProducts();
 
@@ -43,7 +47,10 @@ function ProductPage() {
         setPagination(res.data.pagination);
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        dispatch(pushMessage({
+          text: err.response.data.message,
+          status: "failed",
+        }));
       });
   };
 
@@ -63,9 +70,16 @@ function ProductPage() {
       .then(() => {
         closeModal();
         getProducts();
+        dispatch(pushMessage({
+          text: "建立產品成功",
+          status: "success",
+        }));
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        dispatch(pushMessage({
+          text: err.response.data.message,
+          status: "failed",
+        }));
       });
   }
 
@@ -85,9 +99,16 @@ function ProductPage() {
       .then(() => {
         closeModal();
         getProducts();
+        dispatch(pushMessage({
+          text: "更新產品成功",
+          status: "success",
+        }));
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        dispatch(pushMessage({
+          text: err.response.data.message,
+          status: "failed",
+        }));
       });
   }
 
@@ -97,9 +118,16 @@ function ProductPage() {
       .then(() => {
         closeModal();
         getProducts();
+        dispatch(pushMessage({
+          text: "刪除產品成功",
+          status: "success",
+        }));
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        dispatch(pushMessage({
+          text: err.response.data.message,
+          status: "failed",
+        }));
       });
   }
 
